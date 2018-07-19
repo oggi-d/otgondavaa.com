@@ -1,5 +1,125 @@
-/* You can add global styles to this file, and also import other style files */
-@bg: green;
-body{
-    background-color: @bg;
+// @import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
+@import '~@angular/material/prebuilt-themes/pink-bluegrey.css';
+* {
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+}
+
+body {
+    padding: 0;
+    margin: 0;
+    font-family: 'Roboto', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #303030;
+    color: #ffffff;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+    font-weight: 400;
+    margin: 10px 0;
+}
+
+.pa-5 {
+    padding: 5px;
+}
+
+.pa-15 {
+    padding: 15px;
+}
+
+.jscode {
+    font-family: Courier, 'Courier New', monospace;
+}
+
+.specific {
+    text-decoration: underline;
+    font-weight: 400;
+}
+
+.jsline {
+    margin: 6px 0;
+    display: block;
+}
+
+.tab {
+    padding-left: 20px;
+}
+
+.tab2 {
+    padding-left: 40px;
+}
+
+.tab3 {
+    padding-left: 60px;
+}
+
+.kw-def {
+    color: #48b8e5;
+}
+
+.kw-func {
+    color: #dcdc98;
+}
+
+.kw-var {
+    color: #8cdcfe;
+}
+
+.kw-ret {
+    color: #c57992;
+}
+
+.kw-str {
+    color: #ce9178;
+}
+
+.main-toolbar {
+    position: fixed;
+    top: 0;
+}
+
+.main-container {
+    position: fixed;
+    top: 64px;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    overflow: auto;
+}
+
+@media screen and (max-width: 599px) {
+    .main-container {
+        top: 56px;
+    }
+}
+
+.main-card {
+    .main-header-image {
+        background-image: url("/assets/my-image158x158.jpg");
+        background-size: cover;
+    }
+}
+
+.main-card-content {
+    background-image: url("/assets/thinkTwiceCodeOnce.png");
+    background-position: right bottom;
+    background-repeat: no-repeat;
+    background-size: 115px;
+    mat-card-content {
+        display: block;
+        overflow: auto;
+    }
+}
+
+.main-right-image {
+    background-color: blue;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    width: 30%;
 }
