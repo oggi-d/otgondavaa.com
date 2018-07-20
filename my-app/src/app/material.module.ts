@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {
   MatButtonModule,
   MatMenuModule,
@@ -9,6 +10,10 @@ import {
   MatCardModule,
   MatDividerModule,
   MatTooltipModule,
+  MatChipsModule,
+  MatCheckboxModule,
+  MatTableModule,
+  MatBadgeModule,
 } from '@angular/material';
 
 @NgModule({
@@ -21,7 +26,13 @@ import {
     MatCardModule,
     MatDividerModule,
     MatTooltipModule,
-    MatTabsModule
+    MatChipsModule,
+    MatCheckboxModule,
+    MatTableModule,
+    MatBadgeModule,
+    MatTabsModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   exports: [
     BrowserAnimationsModule,
@@ -32,7 +43,13 @@ import {
     MatCardModule,
     MatDividerModule,
     MatTooltipModule,
-    MatTabsModule
+    MatChipsModule,
+    MatCheckboxModule,
+    MatTableModule,
+    MatBadgeModule,
+    MatTabsModule,
+    FormsModule,
+    ReactiveFormsModule
   ]
 })
 export class MaterialModule { }

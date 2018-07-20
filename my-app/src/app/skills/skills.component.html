@@ -1,3 +1,40 @@
-<p>
-  skills works!
-</p>
+<div class="pa-15">
+  <div fxLayout="column" fxLayout.gt-xs="row" fxLayoutAlign="start stretch" fxLayoutGap="10px" fxLayoutGap.gt-xs="15px">
+    <div fxLayout="row" fxLayoutGap="10px" fxLayoutGap.gt-xs="15px">
+      <mat-checkbox fxFlex.xs="50" [(ngModel)]="Filter.VeryGood" color="primary" (change)="applyFilter()">Very good</mat-checkbox>
+      <mat-checkbox fxFlex.xs="50" [(ngModel)]="Filter.Good" color="primary" (change)="applyFilter()">Good</mat-checkbox>
+    </div>
+    <div fxLayout="row" fxLayoutGap="10px" fxLayoutGap.gt-xs="15px">
+      <mat-checkbox fxFlex.xs="50" [(ngModel)]="Filter.Academic" color="warn" (change)="applyFilter()">Academic</mat-checkbox>
+      <mat-checkbox fxFlex.xs="50" [(ngModel)]="Filter.NotBad" (change)="applyFilter()">Not bad</mat-checkbox>
+    </div>
+  </div>
+</div>
+
+<table mat-table [dataSource]="Skills">
+
+  <ng-container matColumnDef="Name">
+    <th mat-header-cell *matHeaderCellDef style="padding-left: 12px;"> Skill <span fxHide.gt-xs>(Exp years)</span> </th>
+    <td mat-cell *matCellDef="let element" style="padding-left: 12px;">
+      {{element.Name}}
+      <span class="mybadge" fxHide.gt-xs>{{element.Experience}} y</span>
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="Experience">
+    <th mat-header-cell *matHeaderCellDef fxHide.lt-sm> Exp </th>
+    <td mat-cell *matCellDef="let element" fxHide.lt-sm>
+      <span class="mybadge big">{{element.Experience}} years</span>
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="Point">
+    <th mat-header-cell *matHeaderCellDef style="padding-right: 12px;"> Prof </th>
+    <td mat-cell *matCellDef="let element" style="padding-right: 12px;">
+      <span [style.color]="profColorPicker(element)"> {{profPicker(element)}} </span>
+    </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="DisplayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: DisplayedColumns;" style="height: 36px;"></tr>
+</table>

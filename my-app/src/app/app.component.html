@@ -1,6 +1,6 @@
 <mat-toolbar color="primary" class="main-toolbar">
   <span>
-    <img [src]="'/assets/favicon-96x96.png'" />
+    <a [routerLink]="'aboutme'"><img [src]="'/assets/favicon-96x96.png'" /></a>
   </span>
 
   <a mat-button [routerLink]="menu.routerLink" fxHide.lt-sm *ngFor="let menu of Menus">
