@@ -19,10 +19,10 @@ export class AppComponent {
   }, {
     routerLink: 'skills',
     icon: 'school',
-    text: 'What I can do'
+    text: 'What I Can Do'
   }, {
     routerLink: 'contacts',
     icon: 'email',
-    text: 'Contacts'
+    text: 'Contact Me'
   }];
 }
