@@ -1,1 +1,0 @@
-# https://otgondavaa.com
