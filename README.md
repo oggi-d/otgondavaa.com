@@ -1,1 +1,1 @@
-# oggi.github.io
+# https://otgondavaa.com
