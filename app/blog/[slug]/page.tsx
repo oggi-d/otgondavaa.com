@@ -8,6 +8,8 @@ import Image from "next/image";
 import type { Metadata } from "next";
 import type { ComponentProps } from "react";
 
+export const dynamicParams = false;
+
 export async function generateStaticParams() {
   const posts = getAllPosts();
   return posts.map((post) => ({
