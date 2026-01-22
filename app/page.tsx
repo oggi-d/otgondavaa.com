@@ -18,6 +18,8 @@ export const metadata = {
   },
 };
 
+export const dynamic = 'force-static';
+
 export default function Home() {
   const latestPosts = getLatestPosts(3);
 
@@ -30,7 +32,7 @@ export default function Home() {
           <AvatarFallback>OD</AvatarFallback>
         </Avatar>
         <h1 className="mb-4 text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl">
-          Hi, I'm Otgondavaa
+          Hi, I&apos;m Otgondavaa
         </h1>
         <p className="mx-auto mb-8 max-w-2xl text-lg text-muted-foreground sm:text-xl">
           Developer, writer, and financial enthusiast. Welcome to my corner of the internet where I share thoughts,

@@ -10,6 +10,8 @@ export const metadata = {
   description: "Read my latest thoughts on development, finance, and more.",
 };
 
+export const dynamic = 'force-static';
+
 export default function BlogPage() {
   const posts = getAllPosts();
 
