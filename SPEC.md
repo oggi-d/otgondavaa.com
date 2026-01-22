@@ -45,41 +45,41 @@ app/layout.tsx and app/(marketing)/layout.tsx — global header/footer using sha
 
 File structure (starter)
 /app
-  /[lang]                 // optional language route group if you prefer
-  /calculators
-    mortgage/page.tsx
-    savings/page.tsx
-  /blog
-    page.tsx
-    [slug]/page.tsx
-  /contact/page.tsx
-  page.tsx                // Home (EN)
-  mn/page.tsx             // Home MN
-  layout.tsx
-  globals.css
+/[lang] // optional language route group if you prefer
+/calculators
+mortgage/page.tsx
+savings/page.tsx
+/blog
+page.tsx
+[slug]/page.tsx
+/contact/page.tsx
+page.tsx // Home (EN)
+mn/page.tsx // Home MN
+layout.tsx
+globals.css
 /public
-  /images
-    favicon.png
-    placeholder-cover.jpg
+/images
+favicon.png
+placeholder-cover.jpg
 /content
-  /posts
-    2025-01-20-my-first-post.mdx
-  intro.en.mdx
-  intro.mn.mdx
+/posts
+2025-01-20-my-first-post.mdx
+intro.en.mdx
+intro.mn.mdx
 /components
-  Header.tsx
-  Footer.tsx
-  MDXComponents.tsx       // maps custom mdx components to shadcn UI
-  CalculatorCard.tsx
-  MortgageCalculator.tsx
-  SavingsCalculator.tsx
+Header.tsx
+Footer.tsx
+MDXComponents.tsx // maps custom mdx components to shadcn UI
+CalculatorCard.tsx
+MortgageCalculator.tsx
+SavingsCalculator.tsx
 /lib
-  mdx.ts
-  brevo.ts                // small wrapper for Brevo calls
-  ga.ts                   // GA helper that respects consent
+mdx.ts
+brevo.ts // small wrapper for Brevo calls
+ga.ts // GA helper that respects consent
 /styles
-  tailwind.config.js
-  themes.ts                // color tokens
+tailwind.config.js
+themes.ts // color tokens
 .env.example
 next.config.js
 tsconfig.json
@@ -89,14 +89,15 @@ MDX / frontmatter schema (blog posts)
 Required frontmatter:
 
 ---
+
 title: "My Post Title"
 date: "2025-01-20"
 summary: "One-line summary."
 tags: ["personal","kotlin"]
-coverImage: "/images/placeholder-cover.jpg"  # optional
+coverImage: "/images/placeholder-cover.jpg" # optional
 draft: false
----
 
+---
 
 Render MDX with an MDX provider that maps headings, code blocks, inline alerts to shadcn components (via MDXComponents.tsx).
 
@@ -128,7 +129,7 @@ Light & Dark modes toggled via next-themes. Use Tailwind dark: classes.
 
 Blog listing & tags
 
-Blog index: static at build time; reads /content/posts/*.mdx and generates list sorted by date. Show tag badges (clickable — filter not necessary for MVP, but clickable to view tag-specific pages later).
+Blog index: static at build time; reads /content/posts/\*.mdx and generates list sorted by date. Show tag badges (clickable — filter not necessary for MVP, but clickable to view tag-specific pages later).
 
 Home shows latest 3 posts with link to /blog.
 
@@ -166,14 +167,13 @@ Brevo example (pseudo-Fetch)
 
 // /pages/api/subscribe.ts
 const res = await fetch("https://api.brevo.com/v3/contacts", {
-  method: "POST",
-  headers: {
-    "Content-Type": "application/json",
-    "api-key": process.env.BREVO_API_KEY
-  },
-  body: JSON.stringify({ email: userEmail, attributes: { NAME: name } })
+method: "POST",
+headers: {
+"Content-Type": "application/json",
+"api-key": process.env.BREVO_API_KEY
+},
+body: JSON.stringify({ email: userEmail, attributes: { NAME: name } })
 });
-
 
 (Use the official Brevo docs to shape exact endpoints — but pattern is: serverless API route uses BREVO_API_KEY in header and POSTs contact.)
 
@@ -232,15 +232,15 @@ Formulas (clear, to implement in code):
 
 monthlyRate = annualRate / paymentsPerYear / 100
 
-n = termYears * paymentsPerYear
+n = termYears \* paymentsPerYear
 
-monthlyPayment = P * r / (1 - (1 + r)^-n) where r = monthlyRate
+monthlyPayment = P \* r / (1 - (1 + r)^-n) where r = monthlyRate
 
 For extra monthly payment e (as fraction of monthlyPayment or fixed amount): run amortization loop:
 
 for month = 1.. until balance <= 0:
 
-interest = balance * r
+interest = balance \* r
 
 principal = (monthlyPayment + extra) - interest
 
@@ -256,7 +256,7 @@ UI elements:
 
 Input group (shadcn Inputs + Selects).
 
-Toggle: "Add 10% extra" quick button to set extra = monthlyPayment * 0.10.
+Toggle: "Add 10% extra" quick button to set extra = monthlyPayment \* 0.10.
 
 Chart: line chart with two series (remaining balance, cumulative principal) or stacked area for interest vs principal.
 
@@ -280,17 +280,17 @@ Target amount OR choose to calculate "how much monthly to save based on years an
 
 Outputs:
 
-Suggestion: "Suggested monthly savings" based on user income and expenses: suggestion = max( (income - expenses) * 0.2, minimumToReachTarget ) — implement formula:
+Suggestion: "Suggested monthly savings" based on user income and expenses: suggestion = max( (income - expenses) \* 0.2, minimumToReachTarget ) — implement formula:
 
 First compute required monthly contribution to reach target using standard future value formula with monthly compounding:
 
 r = annualReturn/12
 
-n = months = (retirementAge - currentAge) * 12
+n = months = (retirementAge - currentAge) \* 12
 
 monthlyContributionRequired = (target - currentSavings*(1+r)^n) * r / ((1+r)^n - 1)
 
-Also compute a heuristic suggestion: suggestedFromIncome = max( Math.round((income - expenses) * 0.15), 0 ) (15% of surplus). Present both numbers and highlight the one needed to achieve goal.
+Also compute a heuristic suggestion: suggestedFromIncome = max( Math.round((income - expenses) \* 0.15), 0 ) (15% of surplus). Present both numbers and highlight the one needed to achieve goal.
 
 Projection: year-by-year projection of balance until retirement (MVP: list of years and balances). Chart: line of balance vs year.
 
@@ -301,7 +301,7 @@ Export: CSV of yearly projection. Save scenario in localStorage.
 LocalStorage schema (simple)
 // Mortgage
 localStorage.setItem('mortgage_scenarios_v1', JSON.stringify([
-  { id, name, createdAt, inputs: {loanAmount, annualRate, years, paymentsPerYear, extraPct}, results: {...} }
+{ id, name, createdAt, inputs: {loanAmount, annualRate, years, paymentsPerYear, extraPct}, results: {...} }
 ]));
 
 // Savings
@@ -371,11 +371,13 @@ Example MDX post (example)
 /content/posts/2025-01-20-understanding-mortgages.mdx:
 
 ---
+
 title: "Why early mortgage payments are mostly interest"
 date: "2025-01-20"
 summary: "A clear explanation with charts and examples so borrowers know what's happening."
 tags: ["money", "mortgage"]
 coverImage: "/images/mortgage-hero.jpg"
+
 ---
 
 import Callout from '@/components/Callout'
@@ -413,7 +415,5 @@ Test on localhost; push to GitHub and deploy to Vercel. Add env vars in Vercel U
 Verify Brevo calls succeed (use Postman / curl first with API key).
 
 Smoke-test calculators and save/load scenarios. Confirm CSV export.
-
-
 
 supply the initial data purely by you. make sure when I see it, it looks like it has data and fully functioning website.
