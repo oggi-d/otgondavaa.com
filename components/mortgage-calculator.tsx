@@ -125,7 +125,7 @@ export function MortgageCalculator() {
 
   const exportCSV = () => {
     if (!results) return;
-    const headers = ["Month", "Payment", "Interest", "Principal", "Balance"];
+    const headers = ["Сар", "Төлбөр", "Хүү", "Үндсэн", "Үлдэгдэл"];
     const rows = results.rowsWithoutExtra.map((row) => [
       row.month,
       row.payment.toFixed(2),
@@ -146,15 +146,15 @@ export function MortgageCalculator() {
     <div className="space-y-6">
       <Card>
         <CardHeader>
-          <CardTitle>Mortgage Calculator</CardTitle>
+          <CardTitle>Зээлийн тооцоолуур</CardTitle>
           <CardDescription>
-            Calculate your monthly payments and see how extra payments can save you time and money.
+            Сарын төлбөрийг тооцоолж, нэмэлт төлбөр хэрхэн цаг болон мөнгийг хэмнэдгийг хараарай.
           </CardDescription>
         </CardHeader>
         <CardContent className="space-y-4">
           <div className="grid gap-4 md:grid-cols-2">
             <div className="space-y-2">
-              <Label htmlFor="loanAmount">Loan Amount (₮)</Label>
+              <Label htmlFor="loanAmount">Зээлийн дүн (₮)</Label>
               <Input
                 id="loanAmount"
                 type="number"
@@ -164,7 +164,7 @@ export function MortgageCalculator() {
               />
             </div>
             <div className="space-y-2">
-              <Label htmlFor="annualRate">Annual Interest Rate (%)</Label>
+              <Label htmlFor="annualRate">Жилийн хүү (%)</Label>
               <Input
                 id="annualRate"
                 type="number"
@@ -175,7 +175,7 @@ export function MortgageCalculator() {
               />
             </div>
             <div className="space-y-2">
-              <Label htmlFor="termYears">Term (years)</Label>
+              <Label htmlFor="termYears">Хугацаа (жил)</Label>
               <Input
                 id="termYears"
                 type="number"
@@ -185,7 +185,7 @@ export function MortgageCalculator() {
               />
             </div>
             <div className="space-y-2">
-              <Label htmlFor="paymentsPerYear">Payments per Year</Label>
+              <Label htmlFor="paymentsPerYear">Жилийн төлбөрийн тоо</Label>
               <Input
                 id="paymentsPerYear"
                 type="number"
@@ -195,7 +195,7 @@ export function MortgageCalculator() {
               />
             </div>
             <div className="space-y-2">
-              <Label htmlFor="extraPercent">Extra Payment (%)</Label>
+              <Label htmlFor="extraPercent">Нэмэлт төлбөр (%)</Label>
               <Input
                 id="extraPercent"
                 type="number"
@@ -206,7 +206,7 @@ export function MortgageCalculator() {
               />
             </div>
             <div className="space-y-2">
-              <Label htmlFor="startDate">Start Date</Label>
+              <Label htmlFor="startDate">Эхлэх огноо</Label>
               <Input
                 id="startDate"
                 type="date"
@@ -220,13 +220,13 @@ export function MortgageCalculator() {
               variant="outline"
               onClick={() => setExtraPercent("10")}
             >
-              Add 10% Extra
+              10% нэмэлт нэмэх
             </Button>
             <Button
               variant="outline"
               onClick={() => setExtraPercent("0")}
             >
-              Reset Extra
+              Нэмэлт арилгах
             </Button>
           </div>
         </CardContent>
@@ -236,35 +236,35 @@ export function MortgageCalculator() {
         <>
           <Card>
             <CardHeader>
-              <CardTitle>Results</CardTitle>
+              <CardTitle>Үр дүн</CardTitle>
             </CardHeader>
             <CardContent className="space-y-4">
               <div className="grid gap-4 md:grid-cols-2">
                 <div>
-                  <p className="text-sm text-muted-foreground">Monthly Payment</p>
+                  <p className="text-sm text-muted-foreground">Сарын төлбөр</p>
                   <p className="text-2xl font-bold">{formatMNT(results.monthlyPayment)}</p>
                 </div>
                 <div>
-                  <p className="text-sm text-muted-foreground">Total Interest</p>
+                  <p className="text-sm text-muted-foreground">Нийт хүү</p>
                   <p className="text-2xl font-bold">{formatMNT(results.totalInterest)}</p>
                 </div>
                 <div>
-                  <p className="text-sm text-muted-foreground">Total Paid</p>
+                  <p className="text-sm text-muted-foreground">Нийт төлсөн</p>
                   <p className="text-2xl font-bold">{formatMNT(results.totalPaid)}</p>
                 </div>
                 <div>
-                  <p className="text-sm text-muted-foreground">Years to Payoff (without extra)</p>
-                  <p className="text-2xl font-bold">{results.yearsWithoutExtra.toFixed(1)} years</p>
+                  <p className="text-sm text-muted-foreground">Төлөх хугацаа (нэмэлтгүй)</p>
+                  <p className="text-2xl font-bold">{results.yearsWithoutExtra.toFixed(1)} жил</p>
                 </div>
                 {parseFloat(extraPercent) > 0 && (
                   <>
                     <div>
-                      <p className="text-sm text-muted-foreground">Years to Payoff (with extra)</p>
-                      <p className="text-2xl font-bold">{results.yearsWithExtra.toFixed(1)} years</p>
+                      <p className="text-sm text-muted-foreground">Төлөх хугацаа (нэмэлттэй)</p>
+                      <p className="text-2xl font-bold">{results.yearsWithExtra.toFixed(1)} жил</p>
                     </div>
                     <div>
-                      <p className="text-sm text-muted-foreground">Years Saved</p>
-                      <p className="text-2xl font-bold text-accent">{results.yearsSaved.toFixed(1)} years</p>
+                      <p className="text-sm text-muted-foreground">Хэмнэсэн хугацаа</p>
+                      <p className="text-2xl font-bold text-accent">{results.yearsSaved.toFixed(1)} жил</p>
                     </div>
                   </>
                 )}
@@ -274,9 +274,9 @@ export function MortgageCalculator() {
 
           <Card>
             <CardHeader>
-              <CardTitle>Amortization Chart</CardTitle>
+              <CardTitle>Төлбөрийн график</CardTitle>
               <CardDescription>
-                Cumulative interest vs principal paid over time. Notice how early payments are mostly interest.
+                Цаг хугацааны явцад хуримтлагдсан хүү болон үндсэн төлбөр. Эхний төлбөрүүд ихэвчлэн хүү байдаг.
               </CardDescription>
             </CardHeader>
             <CardContent>
@@ -287,8 +287,8 @@ export function MortgageCalculator() {
                   <YAxis />
                   <Tooltip formatter={(value: number | undefined) => value !== undefined ? formatMNT(value) : ''} />
                   <Legend />
-                  <Area type="monotone" dataKey="interest" stackId="1" stroke="#ef4444" fill="#ef4444" name="Cumulative Interest" />
-                  <Area type="monotone" dataKey="principal" stackId="1" stroke="#00BFA6" fill="#00BFA6" name="Cumulative Principal" />
+                  <Area type="monotone" dataKey="interest" stackId="1" stroke="#ef4444" fill="#ef4444" name="Хуримтлагдсан хүү" />
+                  <Area type="monotone" dataKey="principal" stackId="1" stroke="#00BFA6" fill="#00BFA6" name="Хуримтлагдсан үндсэн" />
                 </AreaChart>
               </ResponsiveContainer>
             </CardContent>
@@ -296,9 +296,9 @@ export function MortgageCalculator() {
 
           <Card>
             <CardHeader>
-              <CardTitle>First 12 Months Breakdown</CardTitle>
+              <CardTitle>Эхний 12 сарын дэлгэрэнгүй</CardTitle>
               <CardDescription>
-                This table shows how early payments are mostly interest. The principal portion increases over time.
+                Энэ хүснэгт эхний төлбөрүүд ихэвчлэн хүү байгааг харуулна. Үндсэн төлбөрийн хэсэг цаг хугацаа өнгөрөх тусам нэмэгддэг.
               </CardDescription>
             </CardHeader>
             <CardContent>
@@ -306,11 +306,11 @@ export function MortgageCalculator() {
                 <table className="w-full text-sm">
                   <thead>
                     <tr className="border-b">
-                      <th className="p-2 text-left">Month</th>
-                      <th className="p-2 text-right">Payment</th>
-                      <th className="p-2 text-right">Interest</th>
-                      <th className="p-2 text-right">Principal</th>
-                      <th className="p-2 text-right">Balance</th>
+                      <th className="p-2 text-left">Сар</th>
+                      <th className="p-2 text-right">Төлбөр</th>
+                      <th className="p-2 text-right">Хүү</th>
+                      <th className="p-2 text-right">Үндсэн</th>
+                      <th className="p-2 text-right">Үлдэгдэл</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -327,7 +327,7 @@ export function MortgageCalculator() {
                 </table>
               </div>
               <Button onClick={exportCSV} className="mt-4" variant="outline">
-                Export CSV
+                CSV экспортлох
               </Button>
             </CardContent>
           </Card>

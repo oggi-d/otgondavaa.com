@@ -39,13 +39,13 @@ export function Header() {
         {/* Right side - Desktop Navigation, Theme toggle and mobile menu button */}
         <div className="flex items-center gap-6 z-10">
           {/* Desktop Navigation - Right aligned */}
-          <nav className="hidden md:flex items-center gap-6">
+          <nav className="hidden md:flex items-center gap-3">
             {navItems.map((item) => (
               <Link
                 key={item.href}
                 href={item.href}
                 className={cn(
-                  "text-sm font-medium transition-all duration-200 px-3 py-1.5 rounded-md",
+                  "text-sm font-medium transition-all duration-200 px-2 py-1 rounded-md",
                   "hover:bg-primary hover:text-primary-foreground",
                   "dark:hover:bg-muted dark:hover:text-foreground",
                   pathname === item.href

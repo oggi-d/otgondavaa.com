@@ -4,31 +4,31 @@ import { Calculator, Home, PiggyBank } from "lucide-react";
 
 const calculators = [
   {
-    title: "Mortgage Calculator",
-    description: "Calculate your monthly mortgage payments, total interest, and see how extra payments can save you years.",
+    title: "Зээлийн тооцоолуур",
+    description: "Сарын зээлийн төлбөр, нийт хүүг тооцоолж, нэмэлт төлбөр хэрхэн жил хэмнэдгийг хараарай.",
     href: "/calculators/mortgage",
     icon: Home,
   },
   {
-    title: "Savings Calculator",
-    description: "Plan for retirement and savings goals. See how much you need to save monthly to reach your target.",
+    title: "Хадгаламжийн тооцоолуур",
+    description: "Тэтгэвэр болон хадгаламжийн зорилгоо төлөвлө. Зорилтот дүнд хүрэхийн тулд сар бүр хэр их хэмнэх хэрэгтэйг хараарай.",
     href: "/calculators/savings",
     icon: PiggyBank,
   },
 ];
 
 export const metadata = {
-  title: "Calculators - Otgondavaa",
-  description: "Financial calculators to help you plan your future.",
+  title: "Тооцоолуур - Otgondavaa",
+  description: "Ирээдүйгээ төлөвлөхөд туслах санхүүгийн тооцоолуур.",
 };
 
 export default function CalculatorsPage() {
   return (
     <div className="container mx-auto px-4 py-12">
       <div className="mb-12 text-center">
-        <h1 className="mb-4 text-4xl font-bold">Financial Calculators</h1>
+        <h1 className="mb-4 text-4xl font-bold">Санхүүгийн тооцоолуур</h1>
         <p className="text-lg text-muted-foreground">
-          Tools to help you make informed financial decisions.
+          Мэдээлэлтэй санхүүгийн шийдвэр гаргахад туслах хэрэгслүүд.
         </p>
       </div>
       <div className="grid gap-6 md:grid-cols-2">

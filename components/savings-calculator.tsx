@@ -97,7 +97,7 @@ export function SavingsCalculator() {
 
   const exportCSV = () => {
     if (!results) return;
-    const headers = ["Year", "Age", "Balance", "Annual Contribution"];
+    const headers = ["Жил", "Нас", "Үлдэгдэл", "Жилийн хувь нэмэр"];
     const rows = results.projection.map((row) => [
       row.year,
       row.age,
@@ -117,15 +117,15 @@ export function SavingsCalculator() {
     <div className="space-y-6">
       <Card>
         <CardHeader>
-          <CardTitle>Savings & Retirement Calculator</CardTitle>
+          <CardTitle>Хадгаламж & Тэтгэврийн тооцоолуур</CardTitle>
           <CardDescription>
-            Plan for your retirement and savings goals. See how much you need to save monthly.
+            Тэтгэвэр болон хадгаламжийн зорилгоо төлөвлө. Сар бүр хэр их хэмнэх хэрэгтэйг хараарай.
           </CardDescription>
         </CardHeader>
         <CardContent className="space-y-4">
           <div className="grid gap-4 md:grid-cols-2">
             <div className="space-y-2">
-              <Label htmlFor="currentAge">Current Age</Label>
+              <Label htmlFor="currentAge">Одоогийн нас</Label>
               <Input
                 id="currentAge"
                 type="number"
@@ -135,7 +135,7 @@ export function SavingsCalculator() {
               />
             </div>
             <div className="space-y-2">
-              <Label htmlFor="retirementAge">Retirement Age</Label>
+              <Label htmlFor="retirementAge">Тэтгэврийн нас</Label>
               <Input
                 id="retirementAge"
                 type="number"
@@ -145,7 +145,7 @@ export function SavingsCalculator() {
               />
             </div>
             <div className="space-y-2">
-              <Label htmlFor="currentSavings">Current Savings (₮)</Label>
+              <Label htmlFor="currentSavings">Одоогийн хадгаламж (₮)</Label>
               <Input
                 id="currentSavings"
                 type="number"
@@ -155,7 +155,7 @@ export function SavingsCalculator() {
               />
             </div>
             <div className="space-y-2">
-              <Label htmlFor="monthlyIncome">Monthly Income (₮)</Label>
+              <Label htmlFor="monthlyIncome">Сарын орлого (₮)</Label>
               <Input
                 id="monthlyIncome"
                 type="number"
@@ -165,7 +165,7 @@ export function SavingsCalculator() {
               />
             </div>
             <div className="space-y-2">
-              <Label htmlFor="monthlyExpenses">Monthly Expenses (₮)</Label>
+              <Label htmlFor="monthlyExpenses">Сарын зарлага (₮)</Label>
               <Input
                 id="monthlyExpenses"
                 type="number"
@@ -175,7 +175,7 @@ export function SavingsCalculator() {
               />
             </div>
             <div className="space-y-2">
-              <Label htmlFor="annualReturn">Expected Annual Return (%)</Label>
+              <Label htmlFor="annualReturn">Жилийн өгөөж (%)</Label>
               <Input
                 id="annualReturn"
                 type="number"
@@ -186,7 +186,7 @@ export function SavingsCalculator() {
               />
             </div>
             <div className="space-y-2 md:col-span-2">
-              <Label htmlFor="targetAmount">Target Amount (₮)</Label>
+              <Label htmlFor="targetAmount">Зорилтот дүн (₮)</Label>
               <Input
                 id="targetAmount"
                 type="number"
@@ -203,40 +203,40 @@ export function SavingsCalculator() {
         <>
           <Card>
             <CardHeader>
-              <CardTitle>Savings Recommendations</CardTitle>
+              <CardTitle>Хадгаламжийн зөвлөмж</CardTitle>
             </CardHeader>
             <CardContent className="space-y-4">
               <div className="grid gap-4 md:grid-cols-2">
                 <div>
-                  <p className="text-sm text-muted-foreground">Required Monthly Contribution</p>
+                  <p className="text-sm text-muted-foreground">Шаардлагатай сарын хувь нэмэр</p>
                   <p className="text-2xl font-bold">{formatMNT(results.monthlyContributionRequired)}</p>
                   <p className="text-xs text-muted-foreground mt-1">
-                    To reach your target amount
+                    Зорилтот дүнд хүрэхийн тулд
                   </p>
                 </div>
                 <div>
-                  <p className="text-sm text-muted-foreground">Suggested Monthly Savings</p>
+                  <p className="text-sm text-muted-foreground">Санал болгож буй сарын хэмнэлт</p>
                   <p className="text-2xl font-bold">{formatMNT(results.suggestedFromIncome)}</p>
                   <p className="text-xs text-muted-foreground mt-1">
-                    15% of your surplus income
+                    Орлогын үлдэгдлийн 15%
                   </p>
                 </div>
                 <div>
-                  <p className="text-sm text-muted-foreground">Recommended Monthly Savings</p>
+                  <p className="text-sm text-muted-foreground">Зөвлөмжтэй сарын хэмнэлт</p>
                   <p className="text-2xl font-bold text-primary">{formatMNT(results.monthlyContribution)}</p>
                   <p className="text-xs text-muted-foreground mt-1">
                     {results.monthlyContribution >= results.monthlyContributionRequired
-                      ? "Based on your income"
-                      : "Required to reach target"}
+                      ? "Орлогод үндэслэсэн"
+                      : "Зорилтод хүрэхийн тулд шаардлагатай"}
                   </p>
                 </div>
                 <div>
-                  <p className="text-sm text-muted-foreground">Projected Final Balance</p>
+                  <p className="text-sm text-muted-foreground">Төсөөлөгдсөн эцсийн үлдэгдэл</p>
                   <p className={`text-2xl font-bold ${results.targetAchieved ? "text-accent" : ""}`}>
                     {formatMNT(results.finalBalance)}
                   </p>
                   <p className="text-xs text-muted-foreground mt-1">
-                    {results.targetAchieved ? "Target achieved! ✓" : "Below target"}
+                    {results.targetAchieved ? "Зорилт хангагдлаа! ✓" : "Зорилтоос доогуур"}
                   </p>
                 </div>
               </div>
@@ -245,9 +245,9 @@ export function SavingsCalculator() {
 
           <Card>
             <CardHeader>
-              <CardTitle>Year-by-Year Projection</CardTitle>
+              <CardTitle>Жил бүрийн төсөөлөл</CardTitle>
               <CardDescription>
-                Projected balance growth until retirement age.
+                Тэтгэврийн нас хүртэлх үлдэгдлийн өсөлтийн төсөөлөл.
               </CardDescription>
             </CardHeader>
             <CardContent>
@@ -263,7 +263,7 @@ export function SavingsCalculator() {
                     dataKey="balance"
                     stroke="#6C5CE7"
                     strokeWidth={2}
-                    name="Balance"
+                    name="Үлдэгдэл"
                   />
                 </LineChart>
               </ResponsiveContainer>
@@ -272,17 +272,17 @@ export function SavingsCalculator() {
 
           <Card>
             <CardHeader>
-              <CardTitle>Yearly Projection Table</CardTitle>
+              <CardTitle>Жил бүрийн төсөөллийн хүснэгт</CardTitle>
             </CardHeader>
             <CardContent>
               <div className="overflow-x-auto">
                 <table className="w-full text-sm">
                   <thead>
                     <tr className="border-b">
-                      <th className="p-2 text-left">Year</th>
-                      <th className="p-2 text-left">Age</th>
-                      <th className="p-2 text-right">Balance</th>
-                      <th className="p-2 text-right">Annual Contribution</th>
+                      <th className="p-2 text-left">Жил</th>
+                      <th className="p-2 text-left">Нас</th>
+                      <th className="p-2 text-right">Үлдэгдэл</th>
+                      <th className="p-2 text-right">Жилийн хувь нэмэр</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -298,7 +298,7 @@ export function SavingsCalculator() {
                 </table>
               </div>
               <Button onClick={exportCSV} className="mt-4" variant="outline">
-                Export CSV
+                CSV экспортлох
               </Button>
             </CardContent>
           </Card>

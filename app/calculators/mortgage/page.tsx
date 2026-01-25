@@ -1,8 +1,8 @@
 import { MortgageCalculator } from "@/components/mortgage-calculator";
 
 export const metadata = {
-  title: "Mortgage Calculator - Otgondavaa",
-  description: "Calculate your monthly mortgage payments, total interest, and see how extra payments can save you years.",
+  title: "Зээлийн тооцоолуур - Otgondavaa",
+  description: "Сарын зээлийн төлбөр, нийт хүүг тооцоолж, нэмэлт төлбөр хэрхэн жил хэмнэдгийг хараарай.",
 };
 
 export default function MortgageCalculatorPage() {

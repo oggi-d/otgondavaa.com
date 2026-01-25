@@ -1,8 +1,8 @@
 import { SavingsCalculator } from "@/components/savings-calculator";
 
 export const metadata = {
-  title: "Savings Calculator - Otgondavaa",
-  description: "Plan for retirement and savings goals. See how much you need to save monthly to reach your target.",
+  title: "Хадгаламжийн тооцоолуур - Otgondavaa",
+  description: "Тэтгэвэр болон хадгаламжийн зорилгоо төлөвлө. Зорилтот дүнд хүрэхийн тулд сар бүр хэр их хэмнэх хэрэгтэйг хараарай.",
 };
 
 export default function SavingsCalculatorPage() {
