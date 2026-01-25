@@ -1,6 +1,12 @@
 import Link from "next/link";
 import Image from "next/image";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { SubscribeForm } from "@/components/subscribe-form";
@@ -10,15 +16,17 @@ import { ArrowRight } from "lucide-react";
 
 export const metadata = {
   title: "Otgondavaa - Developer & Writer",
-  description: "Welcome to my personal website. Explore my blog, use financial calculators, and get in touch.",
+  description:
+    "Welcome to my personal website. Explore my blog, use financial calculators, and get in touch.",
   openGraph: {
     title: "Otgondavaa - Developer & Writer",
-    description: "Welcome to my personal website. Explore my blog, use financial calculators, and get in touch.",
+    description:
+      "Welcome to my personal website. Explore my blog, use financial calculators, and get in touch.",
     images: ["/api/og?title=Otgon%20Davaa&siteName=otgondavaa.com"],
   },
 };
 
-export const dynamic = 'force-static';
+export const dynamic = "force-static";
 
 export default function Home() {
   const latestPosts = getLatestPosts(3);
@@ -35,8 +43,9 @@ export default function Home() {
           Hi, I&apos;m Otgondavaa
         </h1>
         <p className="mx-auto mb-8 max-w-2xl text-lg text-muted-foreground sm:text-xl">
-          Developer, writer, and financial enthusiast. Welcome to my corner of the internet where I share thoughts,
-          build tools, and connect with the community.
+          Developer, writer, and financial enthusiast. Welcome to my corner of
+          the internet where I share thoughts, build tools, and connect with the
+          community.
         </p>
         <div className="flex flex-wrap justify-center gap-4">
           <Link href="/blog">
@@ -69,7 +78,7 @@ export default function Home() {
               <Card key={post.slug} className="flex flex-col">
                 {post.coverImage && (
                   <div className="relative h-48 w-full overflow-hidden rounded-t-lg">
-                    {post.coverImage.endsWith('.svg') ? (
+                    {post.coverImage.endsWith(".svg") ? (
                       <img
                         src={post.coverImage}
                         alt={post.title}
@@ -106,7 +115,9 @@ export default function Home() {
                   </CardDescription>
                 </CardHeader>
                 <CardContent className="flex-1">
-                  <p className="text-sm text-muted-foreground">{post.summary}</p>
+                  <p className="text-sm text-muted-foreground">
+                    {post.summary}
+                  </p>
                 </CardContent>
               </Card>
             ))}

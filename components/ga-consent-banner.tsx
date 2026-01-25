@@ -21,7 +21,9 @@ export function GAConsentBanner() {
   React.useEffect(() => {
     if (mounted) {
       const gaId = process.env.NEXT_PUBLIC_GA4_ID;
+      console.log("GA Consent Banner: GA ID from env", gaId);
       if (gaId && getConsent() === "accepted") {
+        console.log("GA Consent Banner: Consent accepted, initializing GA");
         initializeGA(gaId);
       }
     }
@@ -35,8 +37,11 @@ export function GAConsentBanner() {
     setConsent(true);
     setShow(false);
     const gaId = process.env.NEXT_PUBLIC_GA4_ID;
+    console.log("GA Consent Banner: Accept clicked, GA ID", gaId);
     if (gaId) {
       initializeGA(gaId);
+    } else {
+      console.error("GA Consent Banner: No GA ID found in environment variables");
     }
   };
 
