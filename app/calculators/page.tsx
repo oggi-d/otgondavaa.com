@@ -1,42 +1,20 @@
 import Link from "next/link";
-import type { Metadata } from "next";
-import {
-  Card,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-import { ShareButton } from "@/components/share-button";
+import { ArrowRight } from "lucide-react";
+import { cn } from "@/lib/utils";
 import { calculators } from "./calculators";
+import { getCalculatorMetadata } from "./shared-metadata";
+import { ShareButton } from "@/components/share-button";
 
 const title = "Санхүүгийн тооцоолуур - Otgondavaa";
 const description = "Таны хувийн санхүүг төлөвлөхөд туслах тооцоолуур.";
-const canonicalPath = "/calculators";
+const path = "/calculators";
 
-export const metadata: Metadata = {
+export const metadata = getCalculatorMetadata({
   title,
   description,
-  alternates: {
-    canonical: canonicalPath,
-  },
-  openGraph: {
-    type: "website",
-    title,
-    description,
-    url: canonicalPath,
-    images: [
-      `/api/og?title=${encodeURIComponent("Санхүүгийн тооцоолуур")}&siteName=otgondavaa.com`,
-    ],
-  },
-  twitter: {
-    card: "summary_large_image",
-    title,
-    description,
-    images: [
-      `/api/og?title=${encodeURIComponent("Санхүүгийн тооцоолуур")}&siteName=otgondavaa.com`,
-    ],
-  },
-};
+  path,
+  ogTitle: "Санхүүгийн тооцоолуур",
+});
 
 export default function CalculatorsPage() {
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://otgondavaa.com";
@@ -54,44 +32,77 @@ export default function CalculatorsPage() {
   };
 
   return (
-    <div className="container mx-auto px-4 py-12">
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-      />
-      <div className="mb-12">
-        <div className="flex flex-col gap-4 text-center sm:flex-row sm:items-start sm:justify-between sm:text-left">
-          <div className="min-w-0">
-            <h1 className="mb-4 text-4xl font-bold">Санхүүгийн тооцоолуур</h1>
-            <p className="text-lg text-muted-foreground">
+    <div className="min-h-screen">
+      {/* Hero Section with Gradient Background */}
+      <div className="relative overflow-hidden bg-gradient-to-b from-blue-50 via-cyan-50/50 to-background dark:from-blue-950/30 dark:via-cyan-950/20 dark:to-background">
+        <div className="absolute inset-0 bg-grid-pattern opacity-5 pointer-events-none" />
+        <div className="container mx-auto px-4 py-16 md:py-24">
+          <script
+            type="application/ld+json"
+            dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+          />
+          <div className="mx-auto max-w-3xl text-center">
+            <h1 className="text-4xl font-bold tracking-tight md:text-5xl lg:text-6xl">
+              Санхүүгийн тооцоолуур
+            </h1>
+            <p className="mt-4 text-lg text-muted-foreground md:text-xl">
               Мэдээлэлтэй санхүүгийн шийдвэр гаргахад туслах хэрэгслүүд.
             </p>
+            <div className="mt-6 flex justify-center">
+              <ShareButton
+                title="Санхүүгийн тооцоолуур"
+                text={description}
+                path={path}
+              />
+            </div>
           </div>
-          <ShareButton
-            title={title}
-            text={description}
-            path={canonicalPath}
-            className="shrink-0"
-          />
         </div>
       </div>
-      <div className="grid gap-6 md:grid-cols-2">
-        {calculators.map((calc) => {
-          const Icon = calc.icon;
-          return (
-            <Link key={calc.href} href={calc.href}>
-              <Card className="h-full transition-shadow hover:shadow-lg">
-                <CardHeader>
-                  <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-primary/10">
-                    <Icon className="h-6 w-6 text-primary" />
+
+      {/* Calculator Cards Grid */}
+      <div className="container mx-auto px-4 py-12 md:py-16">
+        <div className="grid gap-6 md:grid-cols-2 lg:gap-8">
+          {calculators.map((calc) => {
+            const Icon = calc.icon;
+            return (
+              <Link key={calc.href} href={calc.href} className="group">
+                <div className="h-full overflow-hidden rounded-2xl bg-card shadow-lg transition-all duration-300 hover:shadow-xl hover:-translate-y-1">
+                  {/* Gradient Header */}
+                  <div
+                    className={cn(
+                      "relative h-32 bg-gradient-to-r p-6",
+                      calc.gradient,
+                    )}
+                  >
+                    {/* Icon with white background */}
+                    <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-white/20 backdrop-blur-sm">
+                      <Icon className="h-6 w-6 text-white" />
+                    </div>
                   </div>
-                  <CardTitle>{calc.title}</CardTitle>
-                  <CardDescription>{calc.description}</CardDescription>
-                </CardHeader>
-              </Card>
-            </Link>
-          );
-        })}
+
+                  {/* Card Content */}
+                  <div className="p-6">
+                    <h3 className="text-xl font-bold text-foreground">
+                      {calc.title}
+                    </h3>
+                    <p className="mt-2 text-sm text-muted-foreground leading-relaxed">
+                      {calc.description}
+                    </p>
+                    <div
+                      className={cn(
+                        "mt-4 inline-flex items-center gap-1 text-sm font-semibold transition-colors",
+                        calc.accentColor,
+                      )}
+                    >
+                      Тооцоолуур ашиглах
+                      <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+                    </div>
+                  </div>
+                </div>
+              </Link>
+            );
+          })}
+        </div>
       </div>
     </div>
   );

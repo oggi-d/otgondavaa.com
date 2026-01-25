@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { Share2, Check } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
@@ -54,15 +54,14 @@ export function ShareButton({
   const [state, setState] = useState<"idle" | "copied" | "error">("idle");
   const resetTimer = useRef<number | null>(null);
 
-  const shareUrl = useMemo(() => {
-    if (typeof window === "undefined") return "";
+  function getShareUrl() {
     if (url) return url;
     return buildAbsoluteUrl(path ?? window.location.pathname);
-  }, [path, url]);
+  }
 
   async function onShare() {
     try {
-      if (!shareUrl) return;
+      const shareUrl = getShareUrl();
 
       if (resetTimer.current) {
         window.clearTimeout(resetTimer.current);
