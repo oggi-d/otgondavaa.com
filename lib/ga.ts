@@ -26,10 +26,10 @@ export function initializeGA(gaId: string) {
     // Script exists, ensure gtag is configured
     if (!window.gtag) {
       window.dataLayer = window.dataLayer || [];
-      function gtag() {
-        window.dataLayer!.push(arguments);
+      function gtag(...args: unknown[]) {
+        window.dataLayer!.push(args);
       }
-      window.gtag = gtag as (...args: unknown[]) => void;
+      window.gtag = gtag;
     }
     // Re-send config in case it wasn't set properly
     if (window.gtag) {
@@ -45,17 +45,18 @@ export function initializeGA(gaId: string) {
     console.log("GA: gtag exists but script missing, reinitializing");
   }
 
-  // Initialize dataLayer first (matching Google's exact pattern)
+  // Initialize dataLayer first
   window.dataLayer = window.dataLayer || [];
-  function gtag() {
-    window.dataLayer!.push(arguments);
+  function gtag(...args: unknown[]) {
+    window.dataLayer!.push(args);
   }
-  window.gtag = gtag as (...args: unknown[]) => void;
+  window.gtag = gtag;
 
   // Call gtag commands immediately - they'll be queued in dataLayer
   // and processed when the script loads
-  gtag("js", new Date());
-  gtag("config", gaId);
+  // Use window.gtag which has the proper TypeScript type
+  window.gtag("js", new Date());
+  window.gtag("config", gaId);
 
   // Load gtag script
   const script1 = document.createElement("script");
