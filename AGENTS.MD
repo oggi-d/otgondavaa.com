@@ -3,6 +3,7 @@ Site owner: Otgondavaa Dashnyam (aka Oggi)
 ## Development Rules
 
 ### Mobile First
+
 - All designs and implementations must follow a mobile-first approach
 - Start with mobile layouts and progressively enhance for larger screens
 - Use Tailwind responsive breakpoints (sm:, md:, lg:, xl:) to add desktop styles
@@ -12,6 +13,7 @@ Site owner: Otgondavaa Dashnyam (aka Oggi)
 - Ensure all interactive elements are easily accessible on mobile devices
 
 ### shadcn Components
+
 - **MUST install shadcn components using the CLI, DO NOT generate or create custom implementations**
 - Use `npx shadcn@latest add [component-name]` to install components
 - All UI components must come from shadcn/ui library
@@ -21,6 +23,7 @@ Site owner: Otgondavaa Dashnyam (aka Oggi)
 - Reference: https://ui.shadcn.com/docs/components
 
 ### Language: Mongolian Only
+
 - All user-facing text, labels, buttons, messages, and content must be in Mongolian
 - Exception: Widely recognized English words/names are allowed (e.g., "JavaScript", "React", "Next.js", "GitHub", "LinkedIn", "Facebook", "Instagram", "Email", "API", "CSS", "HTML", "JSON", "RSS", "XML", "URL", "SEO", "OG", "GA4", "CSV", "MDX")
 - Technical terms that are commonly used in Mongolian tech community can remain in English

@@ -21,7 +21,7 @@ export async function GET() {
       <description>${escapeXml(post.summary)}</description>
       <pubDate>${new Date(post.date).toUTCString()}</pubDate>
       <guid>${baseUrl}/blog/${post.slug}</guid>
-    </item>`
+    </item>`,
       )
       .join("\n")}
   </channel>

@@ -34,10 +34,16 @@ export function SubscribeForm() {
         setEmail("");
         setName("");
       } else {
-        setMessage({ type: "error", text: data.error || "Something went wrong" });
+        setMessage({
+          type: "error",
+          text: data.error || "Something went wrong",
+        });
       }
     } catch (error) {
-      setMessage({ type: "error", text: "Failed to subscribe. Please try again." });
+      setMessage({
+        type: "error",
+        text: "Failed to subscribe. Please try again.",
+      });
     } finally {
       setLoading(false);
     }

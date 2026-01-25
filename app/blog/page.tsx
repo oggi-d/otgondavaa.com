@@ -1,6 +1,12 @@
 import Link from "next/link";
 import Image from "next/image";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { getAllPosts } from "@/lib/mdx";
 import { format } from "date-fns";
@@ -10,7 +16,7 @@ export const metadata = {
   description: "Read my latest thoughts on development, finance, and more.",
 };
 
-export const dynamic = 'force-static';
+export const dynamic = "force-static";
 
 export default function BlogPage() {
   const posts = getAllPosts();
@@ -26,15 +32,20 @@ export default function BlogPage() {
 
       {posts.length === 0 ? (
         <div className="text-center py-12">
-          <p className="text-muted-foreground">No blog posts yet. Check back soon!</p>
+          <p className="text-muted-foreground">
+            No blog posts yet. Check back soon!
+          </p>
         </div>
       ) : (
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
           {posts.map((post) => (
-            <Card key={post.slug} className="flex flex-col hover:shadow-lg transition-shadow">
+            <Card
+              key={post.slug}
+              className="flex flex-col hover:shadow-lg transition-shadow"
+            >
               {post.coverImage && (
                 <div className="relative h-48 w-full overflow-hidden rounded-t-lg">
-                  {post.coverImage.endsWith('.svg') ? (
+                  {post.coverImage.endsWith(".svg") ? (
                     <img
                       src={post.coverImage}
                       alt={post.title}

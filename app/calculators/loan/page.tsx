@@ -1,15 +1,15 @@
-import { SavingsCalculator } from "@/components/savings-calculator";
+import { LoanCalculator } from "@/components/loan-calculator";
 import type { Metadata } from "next";
 import { ShareButton } from "@/components/share-button";
 import { getCalculatorBySlug } from "../calculators";
 
-const calculator = getCalculatorBySlug("savings");
+const calculator = getCalculatorBySlug("loan");
 
-const title = `${calculator?.title || "Хадгаламжийн тооцоолуур"} - Otgondavaa`;
+const title = `${calculator?.title || "Зээлийн тооцоолуур"} - Otgondavaa`;
 const description =
   calculator?.description ||
-  "Тэтгэвэр болон хадгаламжийн зорилгоо төлөвлө. Зорилтот дүнд хүрэхийн тулд сар бүр хэр их хэмнэх хэрэгтэйг хараарай.";
-const canonicalPath = "/calculators/savings";
+  "Сарын зээлийн төлбөр, нийт хүүг тооцоолж, нэмэлт төлбөр хэрхэн жил хэмнэдгийг хараарай.";
+const canonicalPath = "/calculators/loan";
 
 export const metadata: Metadata = {
   title,
@@ -23,7 +23,7 @@ export const metadata: Metadata = {
     description,
     url: canonicalPath,
     images: [
-      `/api/og?title=${encodeURIComponent(calculator?.title || "Хадгаламжийн тооцоолуур")}&siteName=otgondavaa.com`,
+      `/api/og?title=${encodeURIComponent(calculator?.title || "Зээлийн тооцоолуур")}&siteName=otgondavaa.com`,
     ],
   },
   twitter: {
@@ -31,12 +31,12 @@ export const metadata: Metadata = {
     title,
     description,
     images: [
-      `/api/og?title=${encodeURIComponent(calculator?.title || "Хадгаламжийн тооцоолуур")}&siteName=otgondavaa.com`,
+      `/api/og?title=${encodeURIComponent(calculator?.title || "Зээлийн тооцоолуур")}&siteName=otgondavaa.com`,
     ],
   },
 };
 
-export default function SavingsCalculatorPage() {
+export default function LoanCalculatorPage() {
   if (!calculator) return null;
 
   const Icon = calculator.icon;
@@ -76,7 +76,7 @@ export default function SavingsCalculatorPage() {
           />
         </div>
       </div>
-      <SavingsCalculator />
+      <LoanCalculator />
     </div>
   );
 }

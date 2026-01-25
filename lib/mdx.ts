@@ -32,7 +32,7 @@ export function getPostBySlug(slug: string): BlogPost | null {
     }
     const realSlug = slug.replace(/\.mdx$/, "");
     const fullPath = path.join(postsDirectory, `${realSlug}.mdx`);
-    
+
     if (!fs.existsSync(fullPath)) {
       return null;
     }

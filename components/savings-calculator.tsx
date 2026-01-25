@@ -3,24 +3,32 @@
 import * as React from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { MoneyInput } from "@/components/ui/money-input";
 import { Label } from "@/components/ui/label";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from "recharts";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import {
+  LineChart,
+  Line,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  Legend,
+  ResponsiveContainer,
+} from "recharts";
+import { formatMNT } from "@/lib/utils";
 
 interface YearlyProjection {
   year: number;
   age: number;
   balance: number;
   contribution: number;
-}
-
-function formatMNT(amount: number): string {
-  return new Intl.NumberFormat("en-US", {
-    style: "currency",
-    currency: "MNT",
-    minimumFractionDigits: 0,
-    maximumFractionDigits: 0,
-  }).format(amount);
 }
 
 export function SavingsCalculator() {
@@ -49,9 +57,10 @@ export function SavingsCalculator() {
     const monthlyRate = returnRate / 12;
 
     // Calculate required monthly contribution
-    const futureValueOfCurrentSavings = savings * Math.pow(1 + monthlyRate, months);
+    const futureValueOfCurrentSavings =
+      savings * Math.pow(1 + monthlyRate, months);
     const neededAmount = target - futureValueOfCurrentSavings;
-    
+
     let monthlyContributionRequired = 0;
     if (neededAmount > 0) {
       monthlyContributionRequired =
@@ -59,12 +68,18 @@ export function SavingsCalculator() {
     }
 
     // Heuristic suggestion: 15% of surplus
-    const suggestedFromIncome = Math.max(Math.round((income - expenses) * 0.15), 0);
+    const suggestedFromIncome = Math.max(
+      Math.round((income - expenses) * 0.15),
+      0,
+    );
 
     // Projection with suggested monthly savings
     const projection: YearlyProjection[] = [];
     let balance = savings;
-    const monthlyContribution = Math.max(monthlyContributionRequired, suggestedFromIncome);
+    const monthlyContribution = Math.max(
+      monthlyContributionRequired,
+      suggestedFromIncome,
+    );
 
     for (let year = 0; year <= retireAge - age; year++) {
       projection.push({
@@ -104,7 +119,9 @@ export function SavingsCalculator() {
       row.balance.toFixed(2),
       row.contribution.toFixed(2),
     ]);
-    const csv = [headers.join(","), ...rows.map((row) => row.join(","))].join("\n");
+    const csv = [headers.join(","), ...rows.map((row) => row.join(","))].join(
+      "\n",
+    );
     const blob = new Blob([csv], { type: "text/csv" });
     const url = URL.createObjectURL(blob);
     const a = document.createElement("a");
@@ -119,7 +136,8 @@ export function SavingsCalculator() {
         <CardHeader>
           <CardTitle>Хадгаламж & Тэтгэврийн тооцоолуур</CardTitle>
           <CardDescription>
-            Тэтгэвэр болон хадгаламжийн зорилгоо төлөвлө. Сар бүр хэр их хэмнэх хэрэгтэйг хараарай.
+            Тэтгэвэр болон хадгаламжийн зорилгоо төлөвлө. Сар бүр хэр их хэмнэх
+            хэрэгтэйг хараарай.
           </CardDescription>
         </CardHeader>
         <CardContent className="space-y-4">
@@ -145,33 +163,30 @@ export function SavingsCalculator() {
               />
             </div>
             <div className="space-y-2">
-              <Label htmlFor="currentSavings">Одоогийн хадгаламж (₮)</Label>
-              <Input
+              <Label htmlFor="currentSavings">Одоогийн хадгаламж</Label>
+              <MoneyInput
                 id="currentSavings"
-                type="number"
                 value={currentSavings}
-                onChange={(e) => setCurrentSavings(e.target.value)}
-                placeholder="10000000"
+                onChange={setCurrentSavings}
+                placeholder="10,000,000"
               />
             </div>
             <div className="space-y-2">
-              <Label htmlFor="monthlyIncome">Сарын орлого (₮)</Label>
-              <Input
+              <Label htmlFor="monthlyIncome">Сарын орлого</Label>
+              <MoneyInput
                 id="monthlyIncome"
-                type="number"
                 value={monthlyIncome}
-                onChange={(e) => setMonthlyIncome(e.target.value)}
-                placeholder="2000000"
+                onChange={setMonthlyIncome}
+                placeholder="2,000,000"
               />
             </div>
             <div className="space-y-2">
-              <Label htmlFor="monthlyExpenses">Сарын зарлага (₮)</Label>
-              <Input
+              <Label htmlFor="monthlyExpenses">Сарын зарлага</Label>
+              <MoneyInput
                 id="monthlyExpenses"
-                type="number"
                 value={monthlyExpenses}
-                onChange={(e) => setMonthlyExpenses(e.target.value)}
-                placeholder="1500000"
+                onChange={setMonthlyExpenses}
+                placeholder="1,500,000"
               />
             </div>
             <div className="space-y-2">
@@ -186,13 +201,12 @@ export function SavingsCalculator() {
               />
             </div>
             <div className="space-y-2 md:col-span-2">
-              <Label htmlFor="targetAmount">Зорилтот дүн (₮)</Label>
-              <Input
+              <Label htmlFor="targetAmount">Зорилтот дүн</Label>
+              <MoneyInput
                 id="targetAmount"
-                type="number"
                 value={targetAmount}
-                onChange={(e) => setTargetAmount(e.target.value)}
-                placeholder="500000000"
+                onChange={setTargetAmount}
+                placeholder="500,000,000"
               />
             </div>
           </div>
@@ -208,35 +222,54 @@ export function SavingsCalculator() {
             <CardContent className="space-y-4">
               <div className="grid gap-4 md:grid-cols-2">
                 <div>
-                  <p className="text-sm text-muted-foreground">Шаардлагатай сарын хувь нэмэр</p>
-                  <p className="text-2xl font-bold">{formatMNT(results.monthlyContributionRequired)}</p>
+                  <p className="text-sm text-muted-foreground">
+                    Шаардлагатай сарын хувь нэмэр
+                  </p>
+                  <p className="text-2xl font-bold">
+                    {formatMNT(results.monthlyContributionRequired)}
+                  </p>
                   <p className="text-xs text-muted-foreground mt-1">
                     Зорилтот дүнд хүрэхийн тулд
                   </p>
                 </div>
                 <div>
-                  <p className="text-sm text-muted-foreground">Санал болгож буй сарын хэмнэлт</p>
-                  <p className="text-2xl font-bold">{formatMNT(results.suggestedFromIncome)}</p>
+                  <p className="text-sm text-muted-foreground">
+                    Санал болгож буй сарын хэмнэлт
+                  </p>
+                  <p className="text-2xl font-bold">
+                    {formatMNT(results.suggestedFromIncome)}
+                  </p>
                   <p className="text-xs text-muted-foreground mt-1">
                     Орлогын үлдэгдлийн 15%
                   </p>
                 </div>
                 <div>
-                  <p className="text-sm text-muted-foreground">Зөвлөмжтэй сарын хэмнэлт</p>
-                  <p className="text-2xl font-bold text-primary">{formatMNT(results.monthlyContribution)}</p>
+                  <p className="text-sm text-muted-foreground">
+                    Зөвлөмжтэй сарын хэмнэлт
+                  </p>
+                  <p className="text-2xl font-bold text-primary">
+                    {formatMNT(results.monthlyContribution)}
+                  </p>
                   <p className="text-xs text-muted-foreground mt-1">
-                    {results.monthlyContribution >= results.monthlyContributionRequired
+                    {results.monthlyContribution >=
+                    results.monthlyContributionRequired
                       ? "Орлогод үндэслэсэн"
                       : "Зорилтод хүрэхийн тулд шаардлагатай"}
                   </p>
                 </div>
                 <div>
-                  <p className="text-sm text-muted-foreground">Төсөөлөгдсөн эцсийн үлдэгдэл</p>
-                  <p className={`text-2xl font-bold ${results.targetAchieved ? "text-accent" : ""}`}>
+                  <p className="text-sm text-muted-foreground">
+                    Төсөөлөгдсөн эцсийн үлдэгдэл
+                  </p>
+                  <p
+                    className={`text-2xl font-bold ${results.targetAchieved ? "text-accent" : ""}`}
+                  >
                     {formatMNT(results.finalBalance)}
                   </p>
                   <p className="text-xs text-muted-foreground mt-1">
-                    {results.targetAchieved ? "Зорилт хангагдлаа! ✓" : "Зорилтоос доогуур"}
+                    {results.targetAchieved
+                      ? "Зорилт хангагдлаа! ✓"
+                      : "Зорилтоос доогуур"}
                   </p>
                 </div>
               </div>
@@ -256,7 +289,11 @@ export function SavingsCalculator() {
                   <CartesianGrid strokeDasharray="3 3" />
                   <XAxis dataKey="age" />
                   <YAxis />
-                  <Tooltip formatter={(value: number | undefined) => value !== undefined ? formatMNT(value) : ''} />
+                  <Tooltip
+                    formatter={(value: number | undefined) =>
+                      value !== undefined ? formatMNT(value) : ""
+                    }
+                  />
                   <Legend />
                   <Line
                     type="monotone"
@@ -290,8 +327,12 @@ export function SavingsCalculator() {
                       <tr key={idx} className="border-b">
                         <td className="p-2">{row.year}</td>
                         <td className="p-2">{row.age}</td>
-                        <td className="p-2 text-right">{formatMNT(row.balance)}</td>
-                        <td className="p-2 text-right">{formatMNT(row.contribution)}</td>
+                        <td className="p-2 text-right">
+                          {formatMNT(row.balance)}
+                        </td>
+                        <td className="p-2 text-right">
+                          {formatMNT(row.contribution)}
+                        </td>
                       </tr>
                     ))}
                   </tbody>

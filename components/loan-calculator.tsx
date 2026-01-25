@@ -3,10 +3,29 @@
 import * as React from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { MoneyInput } from "@/components/ui/money-input";
 import { Label } from "@/components/ui/label";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, AreaChart, Area } from "recharts";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import {
+  LineChart,
+  Line,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  Legend,
+  ResponsiveContainer,
+  AreaChart,
+  Area,
+} from "recharts";
 import { format } from "date-fns";
+import { formatMNT } from "@/lib/utils";
 
 interface AmortizationRow {
   month: number;
@@ -18,24 +37,17 @@ interface AmortizationRow {
   cumulativePrincipal: number;
 }
 
-function formatMNT(amount: number): string {
-  return new Intl.NumberFormat("en-US", {
-    style: "currency",
-    currency: "MNT",
-    minimumFractionDigits: 0,
-    maximumFractionDigits: 0,
-  }).format(amount);
-}
-
-export function MortgageCalculator() {
+export function LoanCalculator() {
   const [loanAmount, setLoanAmount] = React.useState("50000000");
   const [annualRate, setAnnualRate] = React.useState("5.5");
   const [termYears, setTermYears] = React.useState("30");
   const [paymentsPerYear, setPaymentsPerYear] = React.useState("12");
   const [extraPercent, setExtraPercent] = React.useState("0");
-  const [startDate, setStartDate] = React.useState(format(new Date(), "yyyy-MM-dd"));
+  const [startDate, setStartDate] = React.useState(
+    format(new Date(), "yyyy-MM-dd"),
+  );
 
-  const calculateMortgage = () => {
+  const calculateLoan = () => {
     const P = parseFloat(loanAmount);
     const r = parseFloat(annualRate) / 100 / parseFloat(paymentsPerYear);
     const n = parseFloat(termYears) * parseFloat(paymentsPerYear);
@@ -106,8 +118,12 @@ export function MortgageCalculator() {
 
     return {
       monthlyPayment,
-      totalInterest: rowsWithoutExtra.reduce((sum, row) => sum + row.interest, 0),
-      totalPaid: P + rowsWithoutExtra.reduce((sum, row) => sum + row.interest, 0),
+      totalInterest: rowsWithoutExtra.reduce(
+        (sum, row) => sum + row.interest,
+        0,
+      ),
+      totalPaid:
+        P + rowsWithoutExtra.reduce((sum, row) => sum + row.interest, 0),
       yearsWithoutExtra,
       yearsWithExtra,
       yearsSaved,
@@ -121,7 +137,7 @@ export function MortgageCalculator() {
     };
   };
 
-  const results = calculateMortgage();
+  const results = calculateLoan();
 
   const exportCSV = () => {
     if (!results) return;
@@ -133,12 +149,14 @@ export function MortgageCalculator() {
       row.principal.toFixed(2),
       row.balance.toFixed(2),
     ]);
-    const csv = [headers.join(","), ...rows.map((row) => row.join(","))].join("\n");
+    const csv = [headers.join(","), ...rows.map((row) => row.join(","))].join(
+      "\n",
+    );
     const blob = new Blob([csv], { type: "text/csv" });
     const url = URL.createObjectURL(blob);
     const a = document.createElement("a");
     a.href = url;
-    a.download = "mortgage-amortization.csv";
+    a.download = "loan-amortization.csv";
     a.click();
   };
 
@@ -148,19 +166,19 @@ export function MortgageCalculator() {
         <CardHeader>
           <CardTitle>Зээлийн тооцоолуур</CardTitle>
           <CardDescription>
-            Сарын төлбөрийг тооцоолж, нэмэлт төлбөр хэрхэн цаг болон мөнгийг хэмнэдгийг хараарай.
+            Сарын төлбөрийг тооцоолж, нэмэлт төлбөр хэрхэн цаг болон мөнгийг
+            хэмнэдгийг хараарай.
           </CardDescription>
         </CardHeader>
         <CardContent className="space-y-4">
           <div className="grid gap-4 md:grid-cols-2">
             <div className="space-y-2">
-              <Label htmlFor="loanAmount">Зээлийн дүн (₮)</Label>
-              <Input
+              <Label htmlFor="loanAmount">Зээлийн дүн</Label>
+              <MoneyInput
                 id="loanAmount"
-                type="number"
                 value={loanAmount}
-                onChange={(e) => setLoanAmount(e.target.value)}
-                placeholder="50000000"
+                onChange={setLoanAmount}
+                placeholder="50,000,000"
               />
             </div>
             <div className="space-y-2">
@@ -216,16 +234,10 @@ export function MortgageCalculator() {
             </div>
           </div>
           <div className="flex gap-2">
-            <Button
-              variant="outline"
-              onClick={() => setExtraPercent("10")}
-            >
+            <Button variant="outline" onClick={() => setExtraPercent("10")}>
               10% нэмэлт нэмэх
             </Button>
-            <Button
-              variant="outline"
-              onClick={() => setExtraPercent("0")}
-            >
+            <Button variant="outline" onClick={() => setExtraPercent("0")}>
               Нэмэлт арилгах
             </Button>
           </div>
@@ -242,29 +254,47 @@ export function MortgageCalculator() {
               <div className="grid gap-4 md:grid-cols-2">
                 <div>
                   <p className="text-sm text-muted-foreground">Сарын төлбөр</p>
-                  <p className="text-2xl font-bold">{formatMNT(results.monthlyPayment)}</p>
+                  <p className="text-2xl font-bold">
+                    {formatMNT(results.monthlyPayment)}
+                  </p>
                 </div>
                 <div>
                   <p className="text-sm text-muted-foreground">Нийт хүү</p>
-                  <p className="text-2xl font-bold">{formatMNT(results.totalInterest)}</p>
+                  <p className="text-2xl font-bold">
+                    {formatMNT(results.totalInterest)}
+                  </p>
                 </div>
                 <div>
                   <p className="text-sm text-muted-foreground">Нийт төлсөн</p>
-                  <p className="text-2xl font-bold">{formatMNT(results.totalPaid)}</p>
+                  <p className="text-2xl font-bold">
+                    {formatMNT(results.totalPaid)}
+                  </p>
                 </div>
                 <div>
-                  <p className="text-sm text-muted-foreground">Төлөх хугацаа (нэмэлтгүй)</p>
-                  <p className="text-2xl font-bold">{results.yearsWithoutExtra.toFixed(1)} жил</p>
+                  <p className="text-sm text-muted-foreground">
+                    Төлөх хугацаа (нэмэлтгүй)
+                  </p>
+                  <p className="text-2xl font-bold">
+                    {results.yearsWithoutExtra.toFixed(1)} жил
+                  </p>
                 </div>
                 {parseFloat(extraPercent) > 0 && (
                   <>
                     <div>
-                      <p className="text-sm text-muted-foreground">Төлөх хугацаа (нэмэлттэй)</p>
-                      <p className="text-2xl font-bold">{results.yearsWithExtra.toFixed(1)} жил</p>
+                      <p className="text-sm text-muted-foreground">
+                        Төлөх хугацаа (нэмэлттэй)
+                      </p>
+                      <p className="text-2xl font-bold">
+                        {results.yearsWithExtra.toFixed(1)} жил
+                      </p>
                     </div>
                     <div>
-                      <p className="text-sm text-muted-foreground">Хэмнэсэн хугацаа</p>
-                      <p className="text-2xl font-bold text-accent">{results.yearsSaved.toFixed(1)} жил</p>
+                      <p className="text-sm text-muted-foreground">
+                        Хэмнэсэн хугацаа
+                      </p>
+                      <p className="text-2xl font-bold text-accent">
+                        {results.yearsSaved.toFixed(1)} жил
+                      </p>
                     </div>
                   </>
                 )}
@@ -276,7 +306,8 @@ export function MortgageCalculator() {
             <CardHeader>
               <CardTitle>Төлбөрийн график</CardTitle>
               <CardDescription>
-                Цаг хугацааны явцад хуримтлагдсан хүү болон үндсэн төлбөр. Эхний төлбөрүүд ихэвчлэн хүү байдаг.
+                Цаг хугацааны явцад хуримтлагдсан хүү болон үндсэн төлбөр. Эхний
+                төлбөрүүд ихэвчлэн хүү байдаг.
               </CardDescription>
             </CardHeader>
             <CardContent>
@@ -285,10 +316,28 @@ export function MortgageCalculator() {
                   <CartesianGrid strokeDasharray="3 3" />
                   <XAxis dataKey="month" />
                   <YAxis />
-                  <Tooltip formatter={(value: number | undefined) => value !== undefined ? formatMNT(value) : ''} />
+                  <Tooltip
+                    formatter={(value: number | undefined) =>
+                      value !== undefined ? formatMNT(value) : ""
+                    }
+                  />
                   <Legend />
-                  <Area type="monotone" dataKey="interest" stackId="1" stroke="#ef4444" fill="#ef4444" name="Хуримтлагдсан хүү" />
-                  <Area type="monotone" dataKey="principal" stackId="1" stroke="#00BFA6" fill="#00BFA6" name="Хуримтлагдсан үндсэн" />
+                  <Area
+                    type="monotone"
+                    dataKey="interest"
+                    stackId="1"
+                    stroke="#ef4444"
+                    fill="#ef4444"
+                    name="Хуримтлагдсан хүү"
+                  />
+                  <Area
+                    type="monotone"
+                    dataKey="principal"
+                    stackId="1"
+                    stroke="#00BFA6"
+                    fill="#00BFA6"
+                    name="Хуримтлагдсан үндсэн"
+                  />
                 </AreaChart>
               </ResponsiveContainer>
             </CardContent>
@@ -298,7 +347,8 @@ export function MortgageCalculator() {
             <CardHeader>
               <CardTitle>Эхний 12 сарын дэлгэрэнгүй</CardTitle>
               <CardDescription>
-                Энэ хүснэгт эхний төлбөрүүд ихэвчлэн хүү байгааг харуулна. Үндсэн төлбөрийн хэсэг цаг хугацаа өнгөрөх тусам нэмэгддэг.
+                Энэ хүснэгт эхний төлбөрүүд ихэвчлэн хүү байгааг харуулна.
+                Үндсэн төлбөрийн хэсэг цаг хугацаа өнгөрөх тусам нэмэгддэг.
               </CardDescription>
             </CardHeader>
             <CardContent>
@@ -317,10 +367,18 @@ export function MortgageCalculator() {
                     {results.rowsWithoutExtra.map((row) => (
                       <tr key={row.month} className="border-b">
                         <td className="p-2">{row.month}</td>
-                        <td className="p-2 text-right">{formatMNT(row.payment)}</td>
-                        <td className="p-2 text-right">{formatMNT(row.interest)}</td>
-                        <td className="p-2 text-right">{formatMNT(row.principal)}</td>
-                        <td className="p-2 text-right">{formatMNT(row.balance)}</td>
+                        <td className="p-2 text-right">
+                          {formatMNT(row.payment)}
+                        </td>
+                        <td className="p-2 text-right">
+                          {formatMNT(row.interest)}
+                        </td>
+                        <td className="p-2 text-right">
+                          {formatMNT(row.principal)}
+                        </td>
+                        <td className="p-2 text-right">
+                          {formatMNT(row.balance)}
+                        </td>
                       </tr>
                     ))}
                   </tbody>
