@@ -17,7 +17,8 @@ export const metadata = getCalculatorMetadata({
 });
 
 export default function CalculatorsPage() {
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://otgondavaa.com";
+  const siteUrl =
+    process.env.NEXT_PUBLIC_SITE_URL || "https://www.otgondavaa.com";
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "ItemList",

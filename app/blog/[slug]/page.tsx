@@ -31,6 +31,8 @@ export async function generateMetadata({
     };
   }
 
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://otgondavaa.com";
+
   return {
     title: post.title,
     description: post.summary,
@@ -38,9 +40,9 @@ export async function generateMetadata({
       title: post.title,
       description: post.summary,
       images: post.coverImage
-        ? [post.coverImage]
+        ? [post.coverImage.startsWith("http") ? post.coverImage : `${siteUrl}${post.coverImage}`]
         : [
-            `/api/og?title=${encodeURIComponent(post.title)}&siteName=otgondavaa.com`,
+            `${siteUrl}/api/og?title=${encodeURIComponent(post.title)}&siteName=otgondavaa.com`,
           ],
     },
   };

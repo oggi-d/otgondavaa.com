@@ -15,15 +15,18 @@ import { getLatestPosts } from "@/lib/mdx";
 import { format } from "date-fns";
 import { ArrowRight } from "lucide-react";
 
+const siteUrl =
+  process.env.NEXT_PUBLIC_SITE_URL || "https://www.otgondavaa.com";
+
 export const metadata = {
-  title: "Otgondavaa - Developer & Writer",
+  title: "otgondavaa.com",
   description:
-    "Welcome to my personal website. Explore my blog, use financial calculators, and get in touch.",
+    "Хөгжүүлэгч, стартап, санхүү, хөрөнгө оруулалт, бизнес, хувь хүний хөгжил.",
   openGraph: {
-    title: "Otgondavaa - Developer & Writer",
+    title: "otgondavaa.com",
     description:
-      "Welcome to my personal website. Explore my blog, use financial calculators, and get in touch.",
-    images: ["/api/og?title=Otgon%20Davaa&siteName=otgondavaa.com"],
+      "Хөгжүүлэгч, стартап, санхүү, хөрөнгө оруулалт, бизнес, хувь хүний хөгжил.",
+    images: [`${siteUrl}/api/og?title=Otgondavaa&siteName=otgondavaa.com`],
   },
 };
 

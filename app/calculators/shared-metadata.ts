@@ -13,9 +13,11 @@ export function getCalculatorMetadata({
   path,
   ogTitle,
 }: CalculatorMetadataProps): Metadata {
+  const siteUrl =
+    process.env.NEXT_PUBLIC_SITE_URL || "https://www.otgondavaa.com";
   const displayTitle = ogTitle || title.split(" - ")[0];
   const images = [
-    `/api/og?title=${encodeURIComponent(displayTitle)}&siteName=otgondavaa.com`,
+    `${siteUrl}/api/og?title=${encodeURIComponent(displayTitle)}&siteName=otgondavaa.com`,
   ];
 
   return {
