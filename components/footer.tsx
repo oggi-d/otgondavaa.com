@@ -4,17 +4,17 @@ import { Linkedin, Instagram, Facebook } from "lucide-react";
 const socialLinks = [
   {
     name: "LinkedIn",
-    href: "https://linkedin.com/in/otgondavaa",
+    href: "https://www.linkedin.com/in/oggi/",
     icon: Linkedin,
   },
   {
     name: "Instagram",
-    href: "https://instagram.com/otgondavaa",
+    href: "https://www.instagram.com/oggi.joy/",
     icon: Instagram,
   },
   {
     name: "Facebook",
-    href: "https://facebook.com/otgondavaa",
+    href: "https://www.facebook.com/da.otgondavaa/",
     icon: Facebook,
   },
 ];
@@ -22,12 +22,10 @@ const socialLinks = [
 export function Footer() {
   return (
     <footer className="border-t bg-background">
-      <div className="container flex flex-col items-center justify-between gap-4 py-10 md:flex-row md:py-6">
-        <div className="flex flex-col items-center gap-4 px-8 md:flex-row md:gap-2 md:px-0">
-          <p className="text-sm text-muted-foreground">
-            © {new Date().getFullYear()} otgondavaa.com
-          </p>
-        </div>
+      <div className="container mx-auto flex flex-col items-center justify-center gap-6 py-8 px-4 md:flex-row md:justify-between md:py-6">
+        <p className="text-sm text-muted-foreground text-center md:text-left">
+          © {new Date().getFullYear()} otgondavaa.com
+        </p>
         <div className="flex items-center gap-4">
           {socialLinks.map((link) => {
             const Icon = link.icon;

@@ -14,7 +14,7 @@ const inter = Inter({
 export const metadata: Metadata = {
   title: "Otgondavaa - Developer & Writer",
   description: "Personal website of Otgondavaa - Blog, Calculators, and more",
-  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000"),
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || ""),
 };
 
 export default function RootLayout({

@@ -9,7 +9,7 @@ export async function POST(request: NextRequest) {
     if (!email || !message) {
       return NextResponse.json(
         { error: "Email and message are required" },
-        { status: 400 }
+        { status: 400 },
       );
     }
 
@@ -17,9 +17,9 @@ export async function POST(request: NextRequest) {
     await addContact(email, name ? { NAME: name } : {});
 
     // Send email notification
-    const fromEmail = process.env.BREVO_FROM_EMAIL || "noreply@otgondavaa.com";
     await sendTransactionalEmail({
-      to: fromEmail,
+      to: process.env.CONTACT_EMAIL!,
+      replyTo: email,
       subject: `Contact Form: ${name || "Anonymous"}`,
       html: `
         <h2>New Contact Form Submission</h2>
@@ -33,10 +33,8 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ ok: true });
   } catch (error) {
     console.error("Contact error:", error);
-    const message = error instanceof Error ? error.message : "Failed to send message";
-    return NextResponse.json(
-      { error: message },
-      { status: 500 }
-    );
+    const message =
+      error instanceof Error ? error.message : "Failed to send message";
+    return NextResponse.json({ error: message }, { status: 500 });
   }
 }
