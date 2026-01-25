@@ -1,6 +1,5 @@
 import Link from "next/link";
 import { Linkedin, Instagram, Facebook } from "lucide-react";
-import { GAConsentToggle } from "@/components/ga-consent-toggle";
 
 const socialLinks = [
   {
@@ -28,7 +27,6 @@ export function Footer() {
           <p className="text-sm text-muted-foreground">
             © {new Date().getFullYear()} otgondavaa.com
           </p>
-          <GAConsentToggle />
         </div>
         <div className="flex items-center gap-4">
           {socialLinks.map((link) => {
