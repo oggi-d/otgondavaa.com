@@ -2,11 +2,7 @@
 
 declare global {
   interface Window {
-    gtag?: (
-      command: string,
-      targetId: string | Date,
-      config?: Record<string, unknown>
-    ) => void;
+    gtag?: (...args: unknown[]) => void;
     dataLayer?: unknown[];
   }
 }
@@ -20,24 +16,50 @@ export function initializeGA(gaId: string) {
     return;
   }
 
-  // Load gtag script
-  const script1 = document.createElement("script");
-  script1.async = true;
-  script1.src = `https://www.googletagmanager.com/gtag/js?id=${gaId}`;
-  document.head.appendChild(script1);
+  // If already initialized, don't initialize again
+  if (window.gtag && window.dataLayer) {
+    return;
+  }
 
+  // Check if script is already in the DOM
+  const existingScript = document.querySelector(`script[src*="googletagmanager.com/gtag/js"]`);
+  if (existingScript) {
+    // Script exists, just initialize gtag if not already done
+    if (!window.gtag) {
+      window.dataLayer = window.dataLayer || [];
+      function gtag(...args: unknown[]) {
+        window.dataLayer!.push(args);
+      }
+      window.gtag = gtag;
+      gtag("js", new Date());
+      gtag("config", gaId);
+    }
+    return;
+  }
+
+  // Initialize dataLayer first
   window.dataLayer = window.dataLayer || [];
-  function gtag(
-    command: string,
-    targetId: string | Date,
-    config?: Record<string, unknown>
-  ) {
-    window.dataLayer!.push([command, targetId, config]);
+  function gtag(...args: unknown[]) {
+    window.dataLayer!.push(args);
   }
   window.gtag = gtag;
 
-  gtag("js", new Date());
-  gtag("config", gaId);
+  // Load gtag script and wait for it to load
+  const script1 = document.createElement("script");
+  script1.async = true;
+  script1.src = `https://www.googletagmanager.com/gtag/js?id=${gaId}`;
+  
+  script1.onload = () => {
+    gtag("js", new Date());
+    gtag("config", gaId);
+  };
+  
+  // Handle script load errors
+  script1.onerror = () => {
+    console.error("Failed to load Google Analytics script");
+  };
+  
+  document.head.appendChild(script1);
 }
 
 export function trackEvent(action: string, category: string, label?: string) {
