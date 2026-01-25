@@ -23,7 +23,7 @@ import {
   Area,
 } from "recharts";
 import { format } from "date-fns";
-import { formatMNT } from "@/lib/utils";
+import { formatMNT, formatShortMNT } from "@/lib/utils";
 import { Home, Percent, Calendar, TrendingDown } from "lucide-react";
 
 interface AmortizationRow {
@@ -298,17 +298,6 @@ export function LoanCalculator() {
 
   const yearsSaved10 = calculateYearsSavedForPercent(10);
   const yearsSaved20 = calculateYearsSavedForPercent(20);
-
-  // Helper to format numbers in millions/thousands
-  const formatShortMNT = (value: number) => {
-    if (value >= 1000000) {
-      return `${(value / 1000000).toFixed(1)}сая`;
-    }
-    if (value >= 1000) {
-      return `${(value / 1000).toFixed(0)}мян`;
-    }
-    return formatMNT(value);
-  };
 
   return (
     <div className="space-y-8">
