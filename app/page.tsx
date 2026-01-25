@@ -9,6 +9,7 @@ import {
 } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { ButtonLink } from "@/components/ui/button-link";
 import { SubscribeForm } from "@/components/subscribe-form";
 import { getLatestPosts } from "@/lib/mdx";
 import { format } from "date-fns";
@@ -40,24 +41,24 @@ export default function Home() {
           <AvatarFallback>OD</AvatarFallback>
         </Avatar>
         <h1 className="mb-4 text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl">
-          Hi, I&apos;m Otgondavaa
+          Сайн уу, Оогий байна.
         </h1>
         <p className="mx-auto mb-8 max-w-2xl text-lg text-muted-foreground sm:text-xl">
-          Developer, writer, and financial enthusiast. Welcome to my corner of
-          the internet where I share thoughts, build tools, and connect with the
-          community.
+          Миний вэб хуудсанд зочиллож байгаа таньд баярлалаа. 🙏 <br />
+          Миний түлхүүр үгс:{" "}
+          <strong>
+            Хөгжүүлэгч, стартап, санхүү, хөрөнгө оруулалт, бизнес, хувь хүний
+            хөгжил
+          </strong>
+          .
         </p>
         <div className="flex flex-wrap justify-center gap-4">
-          <Link href="/blog">
-            <button className="rounded-lg bg-primary px-6 py-3 text-primary-foreground transition-colors hover:bg-primary/90">
-              Read My Blog
-            </button>
-          </Link>
-          <Link href="/calculators">
-            <button className="rounded-lg border border-border bg-background px-6 py-3 transition-colors hover:bg-accent">
-              Try Calculators
-            </button>
-          </Link>
+          <ButtonLink href="/blog" variant="default">
+            Миний блогийг унших
+          </ButtonLink>
+          <ButtonLink href="/calculators" variant="outline">
+            Тооцоолуур ашиглах
+          </ButtonLink>
         </div>
       </section>
 

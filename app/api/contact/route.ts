@@ -8,7 +8,7 @@ export async function POST(request: NextRequest) {
 
     if (!email || !message) {
       return NextResponse.json(
-        { error: "Email and message are required" },
+        { error: "Имэйл болон мессеж шаардлагатай" },
         { status: 400 },
       );
     }
@@ -34,7 +34,7 @@ export async function POST(request: NextRequest) {
   } catch (error) {
     console.error("Contact error:", error);
     const message =
-      error instanceof Error ? error.message : "Failed to send message";
+      error instanceof Error ? error.message : "Мессеж илгээхэд алдаа гарлаа";
     return NextResponse.json({ error: message }, { status: 500 });
   }
 }

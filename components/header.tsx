@@ -7,20 +7,13 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { cn } from "@/lib/utils";
-import {
-  Menu,
-  X,
-  Home,
-  BookOpen,
-  Calculator,
-  Mail,
-} from "lucide-react";
+import { Menu, X, Home, BookOpen, Calculator, Mail } from "lucide-react";
 
 const navItems = [
-  { href: "/", label: "Home", icon: Home },
-  { href: "/blog", label: "Blog", icon: BookOpen },
-  { href: "/calculators", label: "Calculators", icon: Calculator },
-  { href: "/contact", label: "Contact", icon: Mail },
+  { href: "/", label: "Нүүр", icon: Home },
+  { href: "/blog", label: "Блог", icon: BookOpen },
+  { href: "/calculators", label: "Тооцоолуур", icon: Calculator },
+  { href: "/contact", label: "Холбоо барих", icon: Mail },
 ];
 
 export function Header() {
@@ -41,7 +34,6 @@ export function Header() {
               priority
             />
           </div>
-          <span className="text-xl font-bold">Otgondavaa</span>
         </Link>
 
         {/* Right side - Desktop Navigation, Theme toggle and mobile menu button */}
@@ -53,7 +45,9 @@ export function Header() {
                 key={item.href}
                 href={item.href}
                 className={cn(
-                  "text-sm font-medium transition-colors hover:text-primary",
+                  "text-sm font-medium transition-all duration-200 px-3 py-1.5 rounded-md",
+                  "hover:bg-primary hover:text-primary-foreground",
+                  "dark:hover:bg-muted dark:hover:text-foreground",
                   pathname === item.href
                     ? "text-foreground"
                     : "text-muted-foreground",
@@ -71,7 +65,7 @@ export function Header() {
               size="icon"
               className="md:hidden"
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              aria-label="Toggle menu"
+              aria-label="Цэс нээх/хаах"
             >
               {mobileMenuOpen ? (
                 <X className="h-6 w-6" />
