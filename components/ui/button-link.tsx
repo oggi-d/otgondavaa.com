@@ -11,7 +11,7 @@ const buttonLinkVariants = cva(
         default:
           "bg-primary px-6 py-3 text-primary-foreground hover:bg-primary/90",
         outline:
-          "border border-border bg-background px-6 py-3 hover:bg-accent",
+          "border border-border bg-background px-6 py-3 hover:bg-accent hover:text-accent-foreground",
         secondary:
           "bg-secondary text-secondary-foreground hover:bg-secondary/80",
         ghost: "hover:bg-accent hover:text-accent-foreground",
