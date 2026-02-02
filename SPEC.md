@@ -147,7 +147,7 @@ BREVO_FROM_EMAIL (used as sender for contact replies)
 
 NEXT_PUBLIC_GA4_ID
 
-NEXT_PUBLIC_SITE_URL (e.g., https://otgondavaa.com)
+NEXT_PUBLIC_SITE_URL (e.g., https://www.otgondavaa.com)
 
 Subscribe flow (single-step):
 
@@ -343,7 +343,7 @@ BREVO_FROM_EMAIL (your email: oogii.joy@gmail.com)
 
 NEXT_PUBLIC_GA4_ID (e.g., G-XXXXXXXXX)
 
-NEXT_PUBLIC_SITE_URL (https://otgondavaa.com
+NEXT_PUBLIC_SITE_URL (https://www.otgondavaa.com
 )
 
 NEXTAUTH_SECRET (not needed unless you add auth later)

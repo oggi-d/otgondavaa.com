@@ -18,7 +18,8 @@ export const metadata = getCalculatorMetadata({
 export default function SavingsCalculatorPage() {
   if (!calculator) return null;
 
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://otgondavaa.com";
+  const siteUrl =
+    process.env.NEXT_PUBLIC_SITE_URL || "https://www.otgondavaa.com";
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "WebApplication",

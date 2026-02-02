@@ -15,7 +15,7 @@ export const metadata: Metadata = {
   title: "Otgondavaa - Developer & Writer",
   description: "Personal website of Otgondavaa - Blog, Calculators, and more",
   metadataBase: new URL(
-    process.env.NEXT_PUBLIC_SITE_URL || "https://otgondavaa.com",
+    process.env.NEXT_PUBLIC_SITE_URL || "https://www.otgondavaa.com",
   ),
 };
 

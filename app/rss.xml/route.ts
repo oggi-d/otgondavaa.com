@@ -1,7 +1,8 @@
 import { getAllPosts } from "@/lib/mdx";
 
 export async function GET() {
-  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://otgondavaa.com";
+  const baseUrl =
+    process.env.NEXT_PUBLIC_SITE_URL || "https://www.otgondavaa.com";
   const posts = getAllPosts().slice(0, 20);
 
   const rss = `<?xml version="1.0" encoding="UTF-8"?>
