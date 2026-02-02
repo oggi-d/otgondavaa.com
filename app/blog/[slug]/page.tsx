@@ -4,6 +4,7 @@ import { getPostBySlug, getAllPosts } from "@/lib/mdx";
 import remarkGfm from "remark-gfm";
 import { format } from "date-fns";
 import { Badge } from "@/components/ui/badge";
+import { SubscribeCard } from "@/components/subscribe-card";
 import Image from "next/image";
 import type { Metadata } from "next";
 import type { ComponentProps } from "react";
@@ -110,7 +111,7 @@ export default async function BlogPostPage({
       <header className="mb-8">
         <div className="mb-4 flex flex-wrap gap-2">
           {post.tags.map((tag) => (
-            <Badge key={tag} variant="secondary">
+            <Badge key={tag} variant="default">
               {tag}
             </Badge>
           ))}
@@ -118,7 +119,7 @@ export default async function BlogPostPage({
         <h1 className="mb-4 text-4xl font-bold">{post.title}</h1>
         <p className="mb-6 text-lg text-muted-foreground">{post.summary}</p>
         <time className="text-sm text-muted-foreground">
-          {format(new Date(post.date), "MMMM d, yyyy")}
+          {format(new Date(post.date), "yyyy/MM/dd")}
         </time>
         {post.coverImage && (
           <div className="relative mt-8 h-64 w-full overflow-hidden rounded-lg md:h-96">
@@ -150,6 +151,9 @@ export default async function BlogPostPage({
           components={components}
         />
       </div>
+      <aside className="mt-12">
+        <SubscribeCard />
+      </aside>
     </article>
   );
 }

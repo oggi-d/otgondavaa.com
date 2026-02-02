@@ -30,19 +30,19 @@ export function SubscribeForm() {
       const data = await response.json();
 
       if (response.ok) {
-        setMessage({ type: "success", text: "Successfully subscribed!" });
+        setMessage({ type: "success", text: "Амжилттай бүртгэгдлээ!" });
         setEmail("");
         setName("");
       } else {
         setMessage({
           type: "error",
-          text: data.error || "Something went wrong",
+          text: data.error || "Алдаа гарлаа.",
         });
       }
     } catch (error) {
       setMessage({
         type: "error",
-        text: "Failed to subscribe. Please try again.",
+        text: "Бүртгүүлэхэд алдаа гарлаа. Дахин оролдоно уу.",
       });
     } finally {
       setLoading(false);
@@ -52,24 +52,24 @@ export function SubscribeForm() {
   return (
     <form onSubmit={handleSubmit} className="space-y-4">
       <div className="space-y-2">
-        <Label htmlFor="name">Name (optional)</Label>
+        <Label htmlFor="name">Нэр *</Label>
         <Input
           id="name"
           type="text"
           value={name}
           onChange={(e) => setName(e.target.value)}
-          placeholder="Your name"
+          placeholder="Таны нэр"
         />
       </div>
       <div className="space-y-2">
-        <Label htmlFor="email">Email *</Label>
+        <Label htmlFor="email">Имэйл *</Label>
         <Input
           id="email"
           type="email"
           required
           value={email}
           onChange={(e) => setEmail(e.target.value)}
-          placeholder="your@email.com"
+          placeholder="hello@example.com"
         />
       </div>
       {message && (
@@ -78,7 +78,7 @@ export function SubscribeForm() {
         </Alert>
       )}
       <Button type="submit" disabled={loading} className="w-full">
-        {loading ? "Subscribing..." : "Subscribe"}
+        {loading ? "Бүртгэж байна..." : "Бүртгүүлэх"}
       </Button>
     </form>
   );

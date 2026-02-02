@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Linkedin, Instagram, Facebook } from "lucide-react";
+import { Linkedin, Instagram, Facebook, BookOpen } from "lucide-react";
 
 const XIcon = ({ className }: { className?: string }) => (
   <svg
@@ -34,6 +34,11 @@ const socialLinks = [
     name: "X",
     href: "https://x.com/otgondavaa0",
     icon: XIcon,
+  },
+  {
+    name: "Goodreads",
+    href: "https://www.goodreads.com/otgondavaa",
+    icon: BookOpen,
   },
 ];
 

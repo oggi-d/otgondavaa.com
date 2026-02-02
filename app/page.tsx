@@ -1,18 +1,9 @@
 import Link from "next/link";
-import Image from "next/image";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { ButtonLink } from "@/components/ui/button-link";
-import { SubscribeForm } from "@/components/subscribe-form";
+import { BlogCard } from "@/components/blog-card";
+import { SubscribeCard } from "@/components/subscribe-card";
 import { getLatestPosts } from "@/lib/mdx";
-import { format } from "date-fns";
 import { ArrowRight } from "lucide-react";
 
 const siteUrl =
@@ -33,7 +24,7 @@ export const metadata = {
 export const dynamic = "force-static";
 
 export default function Home() {
-  const latestPosts = getLatestPosts(3);
+  const latestPosts = getLatestPosts(2);
 
   return (
     <div className="container mx-auto px-4 py-12">
@@ -65,83 +56,23 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Latest Blog Posts */}
-      {latestPosts.length > 0 && (
-        <section className="mb-16">
-          <div className="mb-8 flex items-center justify-between">
-            <h2 className="text-3xl font-bold">Latest Posts</h2>
-            <Link
-              href="/blog"
-              className="flex items-center gap-2 text-muted-foreground transition-colors hover:text-foreground"
-            >
-              View all <ArrowRight className="h-4 w-4" />
-            </Link>
-          </div>
-          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-            {latestPosts.map((post) => (
-              <Card key={post.slug} className="flex flex-col">
-                {post.coverImage && (
-                  <div className="relative h-48 w-full overflow-hidden rounded-t-lg">
-                    {post.coverImage.endsWith(".svg") ? (
-                      <img
-                        src={post.coverImage}
-                        alt={post.title}
-                        className="h-full w-full object-cover"
-                      />
-                    ) : (
-                      <Image
-                        src={post.coverImage}
-                        alt={post.title}
-                        fill
-                        className="object-cover"
-                      />
-                    )}
-                  </div>
-                )}
-                <CardHeader>
-                  <div className="mb-2 flex flex-wrap gap-2">
-                    {post.tags.map((tag) => (
-                      <Badge key={tag} variant="secondary">
-                        {tag}
-                      </Badge>
-                    ))}
-                  </div>
-                  <CardTitle>
-                    <Link
-                      href={`/blog/${post.slug}`}
-                      className="hover:text-primary transition-colors"
-                    >
-                      {post.title}
-                    </Link>
-                  </CardTitle>
-                  <CardDescription>
-                    {format(new Date(post.date), "MMMM d, yyyy")}
-                  </CardDescription>
-                </CardHeader>
-                <CardContent className="flex-1">
-                  <p className="text-sm text-muted-foreground">
-                    {post.summary}
-                  </p>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-        </section>
-      )}
-
-      {/* Subscribe Section */}
-      <section className="mx-auto max-w-md">
-        <Card>
-          <CardHeader>
-            <CardTitle>Subscribe to Updates</CardTitle>
-            <CardDescription>
-              Get notified when I publish new posts or release new calculators.
-            </CardDescription>
-          </CardHeader>
-          <CardContent>
-            <SubscribeForm />
-          </CardContent>
-        </Card>
+      {/* Latest 2 posts + Subscribe — 3 equal cards */}
+      <section className="mb-16">
+        <div className="mb-8 flex items-center justify-between">
+          <h2 className="text-3xl font-bold">Сүүлийн бичлэгүүд</h2>
+          <Link
+            href="/blog"
+            className="flex items-center gap-2 text-muted-foreground transition-colors hover:text-foreground"
+          >
+            Бүгдийг харах <ArrowRight className="h-4 w-4" />
+          </Link>
+        </div>
+        <div className="grid gap-6 lg:grid-cols-3">
+          {latestPosts.map((post) => (
+            <BlogCard key={post.slug} post={post} variant="compact" />
+          ))}
+          <SubscribeCard className="flex h-full flex-col" />
+        </div>
       </section>
     </div>
   );
