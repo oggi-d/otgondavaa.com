@@ -37,12 +37,13 @@ export function BlogCard({ post, variant = "default" }: BlogCardProps) {
       href={`/blog/${post.slug}`}
       className="group block h-full overflow-hidden rounded-lg transition-shadow hover:shadow-lg focus-visible:outline focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
     >
-      <Card className="flex h-full flex-col cursor-pointer transition-colors group-hover:border-primary/30">
+      <Card className="flex h-full flex-col cursor-pointer rounded-lg pt-0 transition-colors group-hover:border-primary/30">
         {post.coverImage && (
           <div
             className={`relative w-full shrink-0 overflow-hidden rounded-t-lg ${coverHeight}`}
           >
-            {post.coverImage.endsWith(".svg") ? (
+            {post.coverImage.endsWith(".svg") ||
+            post.coverImage.startsWith("/api/") ? (
               <img
                 src={post.coverImage}
                 alt={post.title}
