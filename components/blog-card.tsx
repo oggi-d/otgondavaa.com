@@ -26,8 +26,8 @@ export function BlogCard({ post, variant = "default" }: BlogCardProps) {
   const isCompact = variant === "compact";
   const coverHeight = isCompact ? "h-48" : "h-56";
   const titleClass = isCompact
-    ? "transition-colors group-hover:text-primary"
-    : "text-xl transition-colors group-hover:text-primary";
+    ? "transition-colors group-hover:text-accent"
+    : "text-xl transition-colors group-hover:text-accent";
   const summaryClass = isCompact
     ? "text-sm text-muted-foreground"
     : "text-muted-foreground";
@@ -37,7 +37,7 @@ export function BlogCard({ post, variant = "default" }: BlogCardProps) {
       href={`/blog/${post.slug}`}
       className="group block h-full overflow-hidden rounded-lg transition-shadow hover:shadow-lg focus-visible:outline focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
     >
-      <Card className="flex h-full flex-col cursor-pointer rounded-lg pt-0 transition-colors group-hover:border-primary/30">
+      <Card className="flex h-full flex-col cursor-pointer rounded-lg pt-0 transition-colors group-hover:border-accent/30">
         {post.coverImage && (
           <div
             className={`relative w-full shrink-0 overflow-hidden rounded-t-lg ${coverHeight}`}

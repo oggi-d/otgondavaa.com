@@ -68,7 +68,7 @@ const components = {
     <p className="mb-4 leading-7" {...props} />
   ),
   a: (props: ComponentProps<"a">) => (
-    <a className="text-primary underline hover:text-primary/80" {...props} />
+    <a className="text-accent underline hover:text-accent/80" {...props} />
   ),
   ul: (props: ComponentProps<"ul">) => (
     <ul className="mb-4 ml-6 list-disc" {...props} />
@@ -140,7 +140,7 @@ export default async function BlogPostPage({
           </div>
         )}
       </header>
-      <div className="prose prose-lg dark:prose-invert prose-headings:font-bold prose-a:text-primary prose-a:no-underline hover:prose-a:underline max-w-none">
+      <div className="prose prose-lg dark:prose-invert prose-headings:font-bold prose-a:text-accent prose-a:no-underline hover:prose-a:underline max-w-none">
         <MDXRemote
           source={post.content}
           options={{
