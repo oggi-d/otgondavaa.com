@@ -10,7 +10,7 @@ export const metadata = getCalculatorMetadata({
   title: `${calculator?.title || "Хадгаламжийн тооцоолуур"} - Otgondavaa`,
   description:
     calculator?.description ||
-    "Тэтгэвэр болон хадгаламжийн зорилгоо төлөвлө. Зорилтот дүнд хүрэхийн тулд сар бүр хэр их хэмнэх хэрэгтэйг хараарай.",
+    "Зорилтот дүнд хүрэхийн тулд сар бүр хэр их хэмнэх хэрэгтэйг хараарай.",
   path,
   ogTitle: calculator?.title,
 });

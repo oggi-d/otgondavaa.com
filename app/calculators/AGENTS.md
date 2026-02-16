@@ -47,7 +47,7 @@ lib/
 
 - Calculator listing cards use colorful gradient headers
 - Individual calculator pages have light gradient hero sections
-- Result cards use gradient backgrounds (cyan for primary results)
+- Result cards use gradient backgrounds; use the same `gradient` value from the calculator’s entry in `calculators.ts`.
 - Dark cards for tips/insights with slate-900 background
 - Stat cards with rounded-xl borders and shadows
 - Use `pointer-events-none` on decorative overlays (e.g., grid patterns)
@@ -67,16 +67,17 @@ lib/
 - Save calculator inputs to localStorage for user convenience
 - Use debounced saves (300ms) to prevent performance issues with sliders
 - Pattern:
+
   ```tsx
   const STORAGE_KEY = "[calculator]-calculator-inputs";
-  
+
   // Load on mount
   React.useEffect(() => {
     const stored = loadFromStorage();
     // Set all state values
     setIsHydrated(true);
   }, []);
-  
+
   // Debounced save
   React.useEffect(() => {
     if (!isHydrated) return;
@@ -104,10 +105,10 @@ Two utility functions in `lib/utils.ts`:
 ```tsx
 import { formatMNT, formatShortMNT } from "@/lib/utils";
 
-formatMNT(10500000);      // "10,500,000₮"
+formatMNT(10500000); // "10,500,000₮"
 formatShortMNT(10500000); // "10.5сая"
-formatShortMNT(500000);   // "500мян"
-formatShortMNT(999);      // "999₮"
+formatShortMNT(500000); // "500мян"
+formatShortMNT(999); // "999₮"
 ```
 
 ### Charts (Recharts)
