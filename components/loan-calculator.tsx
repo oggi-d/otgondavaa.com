@@ -449,7 +449,7 @@ export function LoanCalculator() {
           {results && (
             <>
               {/* Monthly Payment Card - Gradient */}
-              <div className="overflow-hidden rounded-2xl bg-gradient-to-r from-blue-400 via-cyan-400 to-cyan-500 p-6 text-white shadow-lg">
+              <div className="overflow-hidden rounded-2xl bg-linear-to-r from-blue-400 via-cyan-400 to-cyan-500 p-6 text-white shadow-lg">
                 <p className="text-sm font-medium text-white/80">
                   Сарын төлбөр
                 </p>
@@ -571,7 +571,7 @@ export function LoanCalculator() {
         <>
           {/* Chart Card */}
           <Card className="border-0 shadow-lg overflow-hidden">
-            <CardHeader className="bg-gradient-to-r from-slate-50 to-slate-100 dark:from-slate-900 dark:to-slate-800">
+            <CardHeader className="bg-linear-to-r from-slate-50 to-slate-100 dark:from-slate-900 dark:to-slate-800">
               <div className="flex items-center justify-between">
                 <CardTitle className="text-xl">Төлбөрийн график</CardTitle>
                 {parseFloat(extraPercent) > 0 && (
@@ -699,7 +699,7 @@ export function LoanCalculator() {
 
           {/* Yearly Summary Table */}
           <Card className="border-0 shadow-lg overflow-hidden">
-            <CardHeader className="bg-gradient-to-r from-slate-50 to-slate-100 dark:from-slate-900 dark:to-slate-800">
+            <CardHeader className="bg-linear-to-r from-slate-50 to-slate-100 dark:from-slate-900 dark:to-slate-800">
               <div className="flex items-center justify-between flex-wrap gap-2">
                 <CardTitle className="text-xl">Жил бүрийн үлдэгдэл</CardTitle>
                 <div className="flex items-center gap-2">
@@ -775,7 +775,7 @@ export function LoanCalculator() {
 
           {/* Yearly Payment Distribution Table */}
           <Card className="border-0 shadow-lg overflow-hidden">
-            <CardHeader className="bg-gradient-to-r from-slate-50 to-slate-100 dark:from-slate-900 dark:to-slate-800">
+            <CardHeader className="bg-linear-to-r from-slate-50 to-slate-100 dark:from-slate-900 dark:to-slate-800">
               <div className="flex items-center justify-between flex-wrap gap-2">
                 <CardTitle className="text-xl">
                   Жил бүрийн төлбөрийн хуваарилалт

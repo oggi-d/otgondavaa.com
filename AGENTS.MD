@@ -22,6 +22,11 @@ Site owner: Otgondavaa Dashnyam (aka Oggi)
 - Customize shadcn components via Tailwind classes and component props only
 - Reference: https://ui.shadcn.com/docs/components
 
+### Tailwind v4
+
+- This project uses Tailwind CSS v4. Use v4 class names only.
+- Gradients: use `bg-linear-to-*` (e.g. `bg-linear-to-b`, `bg-linear-to-r`), not `bg-gradient-to-*`.
+
 ### Language: Mongolian Only
 
 - All user-facing text, labels, buttons, messages, and content must be in Mongolian

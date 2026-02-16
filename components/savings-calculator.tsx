@@ -280,7 +280,7 @@ export function SavingsCalculator() {
         <div className="space-y-6">
           {results && (
             <>
-              <div className="overflow-hidden rounded-2xl p-6 text-white shadow-lg bg-gradient-to-r from-emerald-400 via-green-400 to-teal-500">
+              <div className="overflow-hidden rounded-2xl p-6 text-white shadow-lg bg-linear-to-r from-emerald-400 via-green-400 to-teal-500">
                 <p className="text-sm font-medium text-white/80">
                   {years} жилийн дараах үлдэгдэл
                 </p>
@@ -325,7 +325,7 @@ export function SavingsCalculator() {
       {results && (
         <>
           <Card className="border-0 shadow-lg overflow-hidden">
-            <CardHeader className="bg-gradient-to-r from-slate-50 to-slate-100 dark:from-slate-900 dark:to-slate-800">
+            <CardHeader className="bg-linear-to-r from-slate-50 to-slate-100 dark:from-slate-900 dark:to-slate-800">
               <CardTitle className="text-xl">Жил бүрийн төсөөлөл</CardTitle>
               <CardDescription>
                 Хадгаламжийн үлдэгдлийн өсөлтийн төсөөлөл
@@ -381,7 +381,7 @@ export function SavingsCalculator() {
           </Card>
 
           <Card className="border-0 shadow-lg overflow-hidden">
-            <CardHeader className="bg-gradient-to-r from-slate-50 to-slate-100 dark:from-slate-900 dark:to-slate-800">
+            <CardHeader className="bg-linear-to-r from-slate-50 to-slate-100 dark:from-slate-900 dark:to-slate-800">
               <CardTitle className="text-xl">
                 Жил бүрийн төсөөллийн хүснэгт
               </CardTitle>

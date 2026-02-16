@@ -35,7 +35,7 @@ export default function CalculatorsPage() {
   return (
     <div className="min-h-screen">
       {/* Hero Section with Gradient Background */}
-      <div className="relative overflow-hidden bg-gradient-to-b from-blue-50 via-cyan-50/50 to-background dark:from-blue-950/30 dark:via-cyan-950/20 dark:to-background">
+      <div className="relative overflow-hidden bg-linear-to-b from-blue-50 via-cyan-50/50 to-background dark:from-blue-950/30 dark:via-cyan-950/20 dark:to-background">
         <div className="absolute inset-0 bg-grid-pattern opacity-5 pointer-events-none" />
         <div className="container mx-auto px-4 py-16 md:py-24">
           <script
@@ -71,7 +71,7 @@ export default function CalculatorsPage() {
                   {/* Gradient Header */}
                   <div
                     className={cn(
-                      "relative h-32 bg-gradient-to-r p-6",
+                      "relative h-32 bg-linear-to-r p-6",
                       calc.gradient,
                     )}
                   >

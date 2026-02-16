@@ -36,7 +36,7 @@ export function CalculatorLayout({
       />
 
       {/* Hero Header with Gradient Background */}
-      <div className="relative overflow-hidden bg-gradient-to-b from-blue-50 via-cyan-50/50 to-background dark:from-blue-950/30 dark:via-cyan-950/20 dark:to-background">
+      <div className="relative overflow-hidden bg-linear-to-b from-blue-50 via-cyan-50/50 to-background dark:from-blue-950/30 dark:via-cyan-950/20 dark:to-background">
         <div className="absolute inset-0 bg-grid-pattern opacity-5 pointer-events-none" />
         <div className="container mx-auto px-4 py-8 md:py-12">
           {/* Back Link */}
@@ -55,7 +55,7 @@ export function CalculatorLayout({
               <div className="mb-6 flex justify-center">
                 <div
                   className={cn(
-                    "flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-r shadow-lg",
+                    "flex h-16 w-16 items-center justify-center rounded-2xl bg-linear-to-r shadow-lg",
                     gradient,
                   )}
                 >
