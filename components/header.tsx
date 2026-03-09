@@ -7,11 +7,20 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { cn } from "@/lib/utils";
-import { Menu, X, Home, BookOpen, Calculator, Mail } from "lucide-react";
+import {
+  Menu,
+  X,
+  Home,
+  BookOpen,
+  Calculator,
+  GraduationCap,
+  Mail,
+} from "lucide-react";
 
 const navItems = [
   { href: "/", label: "Нүүр", icon: Home },
   { href: "/blog", label: "Блог", icon: BookOpen },
+  { href: "/mentorship", label: "Сургалт", icon: GraduationCap },
   { href: "/calculators", label: "Тооцоолуур", icon: Calculator },
   { href: "/contact", label: "Холбоо барих", icon: Mail },
 ];
