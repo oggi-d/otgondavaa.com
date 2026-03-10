@@ -1,19 +1,46 @@
 ---
-title: "Хөгжүүлэгчийн хэрэгслүүд"
+title: "Developer Tooling Upgrades"
 ---
 
-## Яагаад “tooling” чухал вэ?
+## Mentorship task: “AI-powered tooling”-оо production-ready болго
 
-Хэрэгсэл зөв сонгосноор:
+### 1) Local AI IDE-ээ тохируул
 
-- Давтагддаг ажлыг автоматжуулна (format/lint, тест, release).
-- Алдааг эрт барина (typecheck, pre-commit, CI).
-- Багийн хамтын ажиллагааг хурдлуулна (PR review, стандарт, нэг мөр workflow).
+- Cursor (эсвэл VS Code + AI extension)-оо суулгаж, repo-г нээ
+- `format on save`, TypeScript/ESLint/Prettier (байгаа бол)-ийг ажиллаж байгааг баталгаажуул
+- **Баталгаажуулалт**: өөрийн нэг файлыг format хийлгэж diff гарч байгааг харуул (screenshot эсвэл богино бичлэг)
 
-## Энэ хэсэгт юу орно вэ?
+### 2) GitHub CLI эсвэл MCP холбо
 
-- **IDE & Editor**: Cursor, VS Code, AI нэмэлтүүдийг бодит workflow дээр тохируулах
-- **Git & PR соёл**: салбарлалт, meaningful commit, review-ийн дадал
-- **Local dev environment**: Docker ашиглаад dev/prod parity-д ойртох
-- **Аюулгүй байдал ба автоматжуулалт**: secret management, dependency hygiene, lint/format automation
+- **Сонголт A — GitHub CLI (`gh`)**: login хийгээд repo дээр `gh pr status` ажилладаг болго
+- **Сонголт B — MCP**: GitHub MCP (эсвэл хэрэглэж буй MCP)-ээ IDE-тэй холбоод issue/PR уншиж чаддаг болго
+- **Баталгаажуулалт**: `gh auth status` (эсвэл MCP connection status)-ын үр дүнг screenshot-аар баримтжуул
 
+### 3) “Implementation бүр unit test-тэй” дүрэм + “needle” илрүүлэлт нэм
+
+- **Дүрэм**: Шинэ feature/bugfix бүр дор хаяж 1 unit test дагалдана
+- **Needle** (илрүүлэх механизм) сонгоод project дээрээ хэрэгжүүл:
+  - **Pre-commit**: өөрчлөлтөд test файл нэмэгдээгүй бол commit блоклох
+  - **CI**: PR дээр “код өөрчлөгдсөн мөрүүд” байгаа хэрнээ test өөрчлөгдөөгүй бол fail болгох
+  - **PR template / checklist**: “Unit test нэмсэн” гэдэг checkbox-ыг заавал бөглүүлэх (automated check-тэй хослуулбал илүү сайн)
+- **Баталгаажуулалт**: санаатайгаар “test-гүй өөрчлөлт” хийгээд check чинь fail болж байгааг харуул, дараа нь unit test нэмээд pass болго
+
+### 4) “Өөрчлөлт хийгээд PR үүсгэдэг” Skill үүсгэ
+
+- **Зорилго**: нэг команд/даалгавраар:
+  - branch үүсгэх
+  - өөрчлөлт хийх (эсвэл хийх алхмуудыг нарийн заах)
+  - unit test нэмэх
+  - тест/линт ажиллуулах
+  - PR үүсгэх (title/body + test plan-тэй)
+- **Баталгаажуулалт**: skill-ээ ажиллуулж “draft PR” үүсгэж чаддаг болго (хаалттай repo байвал fork/branch policy-г дага)
+
+### 5) Skill-ээ ашиглаад жижиг feature shipped хий
+
+- Жижигхэн, хэмжигдэхүйц зүйл сонго (жишээ: UI дээр жижиг сайжруулалт, жижиг util нэмэх, жижиг bug fix)
+- Skill-ээрээ өөрчлөлтийг хийлгэж PR үүсгээд:
+  - unit test нэмэгдсэн эсэх
+  - локал тест/линт pass эсэх
+  - CI pass эсэх (байгаа бол)
+  - PR description-д **Test plan** бодитоор бичигдсэн эсэх
+- **Баталгаажуулалт**: PR линк + CI pass screenshot + “before/after” богино бичлэг (эсвэл screenshot)
