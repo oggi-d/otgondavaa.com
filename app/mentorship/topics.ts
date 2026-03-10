@@ -1,5 +1,6 @@
 import type { LucideIcon } from "lucide-react";
-import { Brain, List } from "lucide-react";
+import { Brain, List, Wrench } from "lucide-react";
+import { getSectionById } from "./topic-index";
 
 export interface MentorshipTopic {
   title: string;
@@ -12,6 +13,14 @@ export interface MentorshipTopic {
   /** Accent color for links */
   accentColor: string;
 }
+
+export const mentorshipLanding = {
+  title: "Орчин цагийн програм хангамж хөгжүүлэлт",
+  description:
+    "AI болон LLM - хэрхэн ажилладаг вэ? CI/CD гэж юу вэ, яагаад хэрэглэдэг вэ? Автоматжуулсан тестийн үр ашиг юу вэ? Ямар ямар түгээмэл ашиглагддаг архитектын шийдлүүд байдаг вэ?",
+  path: "/mentorship",
+  shareTitle: "Орчин цагийн програм хангамж хөгжүүлэлт",
+} as const;
 
 /**
  * Менторлагчийн лекц, дадлагын сэдвүүд.
@@ -28,14 +37,22 @@ export const mentorshipTopics: MentorshipTopic[] = [
     accentColor: "text-violet-600",
   },
   {
-    title: "Mindset & AI Foundation",
-    description:
-      "Сэтгэлзүй, AI-ийн үндэс, SDD, RAG, fine-tuning болон жишээ төсөл.",
-    href: "/mentorship/mindset-ai-foundation",
+    title: getSectionById("mindset-ai-foundation").section,
+    description: getSectionById("mindset-ai-foundation").description || "",
+    href: `/mentorship/${getSectionById("mindset-ai-foundation").id}`,
     icon: Brain,
     slug: "mindset-ai-foundation",
     gradient: "from-violet-500 via-purple-500 to-fuchsia-600",
     accentColor: "text-violet-600",
+  },
+  {
+    title: getSectionById("developer-tooling-upgrades").section,
+    description: getSectionById("developer-tooling-upgrades").description || "",
+    href: `/mentorship/${getSectionById("developer-tooling-upgrades").id}`,
+    icon: Wrench,
+    slug: "developer-tooling-upgrades",
+    gradient: "from-sky-500 via-blue-500 to-indigo-600",
+    accentColor: "text-sky-600",
   },
 ];
 

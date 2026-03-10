@@ -1,0 +1,11 @@
+---
+description: Use English in chat; Mongolian only for website copy/content
+alwaysApply: true
+---
+
+# Chat language vs site language
+
+- **Chat with the user in English** (analysis, plans, explanations, PR/commit messages, etc.).
+- **Mongolian-only applies to the website itself**:
+  - All **user-facing** UI text, labels, buttons, messages, navigation items, and **MDX content** must be Mongolian.
+  - Keep common proper nouns/tech terms in English when appropriate (e.g., JavaScript, React, Next.js, GitHub, API).

@@ -1,30 +1,16 @@
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { mentorshipTopics } from "./topics";
+import { mentorshipLanding, mentorshipTopics } from "./topics";
 import { ShareButton } from "@/components/share-button";
+import { getMentorshipMetadata } from "./shared-metadata";
 
-const siteUrl =
-  process.env.NEXT_PUBLIC_SITE_URL || "https://www.otgondavaa.com";
-
-const title = "Орчин цагийн програм хангамж хөгжүүлэлт - Сургалтын материалууд";
-const description =
-  "Орчин цагийн програм хангамж хөгжүүлэлт сургалтын хүрээнд ашигладаг лекц, слайд болон дадлагын материалууд.";
-const path = "/mentorship";
-
-export const metadata = {
-  title: `${title} - Otgondavaa`,
-  description,
-  alternates: { canonical: path },
-  openGraph: {
-    title,
-    description,
-    url: path,
-    images: [
-      `${siteUrl}/api/og?title=${encodeURIComponent("Орчин цагийн програм хангамж хөгжүүлэлт - Сургалтын материалууд")}&siteName=otgondavaa.com`,
-    ],
-  },
-};
+export const metadata = getMentorshipMetadata({
+  title: `${mentorshipLanding.title} - Otgondavaa`,
+  description: mentorshipLanding.description,
+  path: mentorshipLanding.path,
+  ogTitle: mentorshipLanding.title,
+});
 
 export default function MentorshipPage() {
   return (
@@ -35,17 +21,16 @@ export default function MentorshipPage() {
         <div className="container mx-auto px-4 py-16 md:py-24">
           <div className="mx-auto max-w-3xl text-center">
             <h1 className="text-4xl font-bold tracking-tight md:text-5xl lg:text-6xl">
-              Орчин цагийн програм хангамж хөгжүүлэлт
+              {mentorshipLanding.title}
             </h1>
             <p className="mt-4 text-lg text-muted-foreground md:text-xl">
-              Лекц болон дадлагын сэдвүүд. Слайд, материал энд цуглуулсан тул
-              дараа нь ашиглахад тохиромжтой.
+              {mentorshipLanding.description}
             </p>
             <div className="mt-6 flex justify-center">
               <ShareButton
-                title="Менторлагч - Лекц ба дадлага"
-                text={description}
-                path={path}
+                title={mentorshipLanding.shareTitle}
+                text={mentorshipLanding.description}
+                path={mentorshipLanding.path}
               />
             </div>
           </div>
