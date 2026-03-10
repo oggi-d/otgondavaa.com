@@ -1,5 +1,5 @@
 import type { LucideIcon } from "lucide-react";
-import { List } from "lucide-react";
+import { Brain, List } from "lucide-react";
 
 export interface MentorshipTopic {
   title: string;
@@ -25,6 +25,16 @@ export const mentorshipTopics: MentorshipTopic[] = [
     icon: List,
     slug: "intro",
     gradient: "from-violet-400 via-purple-400 to-fuchsia-500",
+    accentColor: "text-violet-600",
+  },
+  {
+    title: "Mindset & AI Foundation",
+    description:
+      "Сэтгэлзүй, AI-ийн үндэс, SDD, RAG, fine-tuning болон жишээ төсөл.",
+    href: "/mentorship/mindset-ai-foundation",
+    icon: Brain,
+    slug: "mindset-ai-foundation",
+    gradient: "from-violet-500 via-purple-500 to-fuchsia-600",
     accentColor: "text-violet-600",
   },
 ];
