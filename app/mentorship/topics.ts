@@ -1,5 +1,5 @@
 import type { LucideIcon } from "lucide-react";
-import { Brain, GitBranch, List, Wrench } from "lucide-react";
+import { Brain, GitBranch, List, TestTube, Wrench } from "lucide-react";
 import { getSectionById } from "./topic-index";
 
 export interface MentorshipTopic {
@@ -53,6 +53,15 @@ export const mentorshipTopics: MentorshipTopic[] = [
     slug: "developer-tooling-upgrades",
     gradient: "from-sky-500 via-blue-500 to-indigo-600",
     accentColor: "text-sky-600",
+  },
+  {
+    title: getSectionById("testing-culture").section,
+    description: getSectionById("testing-culture").description || "",
+    href: `/mentorship/${getSectionById("testing-culture").id}`,
+    icon: TestTube,
+    slug: "testing-culture",
+    gradient: "from-amber-500 via-orange-500 to-rose-600",
+    accentColor: "text-amber-600",
   },
   {
     title: getSectionById("ci-cd-from-scratch").section,

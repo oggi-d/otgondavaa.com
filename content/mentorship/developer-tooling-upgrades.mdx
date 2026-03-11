@@ -26,7 +26,7 @@ Cursor: Done!
 
 Уг жишээг [Cursor-under-the-hood](https://roman.pt/posts/cursor-under-the-hood/) -ээс авсан.
 
-## Mentorship task: “AI-powered tooling”-оо production-ready болго
+## “AI-powered tooling”-оо production-ready болго
 
 ### 1) Local AI IDE-ээ тохируул
 
@@ -40,12 +40,11 @@ Cursor: Done!
 - **Сонголт B — MCP**: GitHub MCP (эсвэл хэрэглэж буй MCP)-ээ IDE-тэй холбоод issue/PR уншиж чаддаг болго
 - **Баталгаажуулалт**: `gh auth status` (эсвэл MCP connection status)-ын үр дүнг screenshot-аар баримтжуул
 
-### 3) “Implementation бүр unit test-тэй” дүрэм + “needle” илрүүлэлт нэм
+### 3) “Implementation бүр unit test-тэй” дүрэм + илрүүлэлт нэм
 
 - **Дүрэм**: Шинэ feature/bugfix бүр дор хаяж 1 unit test дагалдана
 - **Needle** (илрүүлэх механизм) сонгоод project дээрээ хэрэгжүүл:
-  - **Pre-commit**: өөрчлөлтөд test файл нэмэгдээгүй бол commit блоклох
-  - **CI**: PR дээр “код өөрчлөгдсөн мөрүүд” байгаа хэрнээ test өөрчлөгдөөгүй бол fail болгох
+  - **Pre-commit**: өөрчлөлтөд хийгдэж дууссаны дараа LLM хариулт дээр текст гаргуулах
   - **PR template / checklist**: “Unit test нэмсэн” гэдэг checkbox-ыг заавал бөглүүлэх (automated check-тэй хослуулбал илүү сайн)
 - **Баталгаажуулалт**: санаатайгаар “test-гүй өөрчлөлт” хийгээд check чинь fail болж байгааг харуул, дараа нь unit test нэмээд pass болго
 

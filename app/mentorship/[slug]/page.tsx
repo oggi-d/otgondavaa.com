@@ -58,11 +58,10 @@ export default async function MentorshipTopicPage({ params }: PageProps) {
   // Intro is served by app/mentorship/intro/page.tsx (static route)
   if (slug === "intro") notFound();
 
-  const mdxContent = getMentorshipContent(slug);
-  if (!mdxContent) notFound();
-
   const sectionForSlug = topicIndexSections.filter((s) => s.id === slug);
   if (sectionForSlug.length === 0) notFound();
+
+  const mdxContent = getMentorshipContent(slug);
 
   return (
     <MentorshipContentLayout
@@ -70,19 +69,21 @@ export default async function MentorshipTopicPage({ params }: PageProps) {
       sections={sectionForSlug}
       variant="detail"
     >
-      <Card className="overflow-hidden border-0 shadow-lg bg-card/95 backdrop-blur-sm">
-        <CardContent className="px-6 py-6">
-          <div className="prose prose-sm dark:prose-invert max-w-none">
-            <MDXRemote
-              source={mdxContent.content}
-              options={{
-                mdxOptions: { remarkPlugins: [remarkGfm] },
-              }}
-              components={mdxComponents}
-            />
-          </div>
-        </CardContent>
-      </Card>
+      {mdxContent ? (
+        <Card className="overflow-hidden border-0 shadow-lg bg-card/95 backdrop-blur-sm">
+          <CardContent className="px-6 py-6">
+            <div className="prose prose-sm dark:prose-invert max-w-none">
+              <MDXRemote
+                source={mdxContent.content}
+                options={{
+                  mdxOptions: { remarkPlugins: [remarkGfm] },
+                }}
+                components={mdxComponents}
+              />
+            </div>
+          </CardContent>
+        </Card>
+      ) : null}
     </MentorshipContentLayout>
   );
 }

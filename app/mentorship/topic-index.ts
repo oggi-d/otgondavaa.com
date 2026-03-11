@@ -233,69 +233,6 @@ export const topicIndexSections: IndexSection[] = [
     ],
   },
   {
-    id: "ci-cd-from-scratch",
-    section: "CI/CD from Scratch",
-    description:
-      "CI/CD-ийн үндэс, pipeline, deploy стратеги ба аюулгүй байдал.",
-    groups: [
-      {
-        id: "ci-cd-from-scratch--what-why",
-        name: "CI/CD гэж юу вэ, яагаад хэрэгтэй вэ?",
-        problem: '"It works on my machine" problem.',
-        topics: [
-          {
-            name: "Why CI/CD exists",
-            problem: 'The "it works on my machine" problem.',
-          },
-        ],
-      },
-      {
-        id: "ci-cd-from-scratch--pipeline-basics",
-        name: "Pipeline үндэс",
-        problem: "Build, test, deploy; first pipeline.",
-        topics: [
-          {
-            name: "GitHub Actions fundamentals",
-            problem: "First pipeline: build → test → deploy.",
-          },
-          {
-            name: "Cloud DevOps Pipelines",
-            problem:
-              "Pipelines in your ecosystem (e.g. Azure DevOps, GitLab CI).",
-          },
-          {
-            name: "Build vs. release pipelines",
-            problem: "Mental model difference.",
-          },
-        ],
-      },
-      {
-        id: "ci-cd-from-scratch--promotion-deploy-strategy",
-        name: "Environment promotion ба deploy стратеги",
-        problem: "Dev → staging → prod; rollbacks; security.",
-        topics: [
-          {
-            name: "Environment promotion gates",
-            problem:
-              "Dev → staging → prod with manual approval (critical for fintech).",
-          },
-          {
-            name: "Rolling vs. blue/green vs. canary",
-            problem: "Which is right for a small team.",
-          },
-          {
-            name: "Automated rollbacks",
-            problem: "What happens when a deploy goes wrong at 2am.",
-          },
-          {
-            name: "Pipeline security",
-            problem: "Secrets in CI, SAST, dependency vulnerability checks.",
-          },
-        ],
-      },
-    ],
-  },
-  {
     id: "testing-culture",
     section: "Testing Culture",
     description: "Тестийн соёл, пирамид, TDD болон AI-тай тест бичих.",
@@ -314,16 +251,25 @@ export const topicIndexSections: IndexSection[] = [
       },
       {
         id: "testing-culture--unit-testing",
-        name: "Unit testing",
+        name: "Types testing",
         problem: "Frameworks, structure, naming; accounting/financial logic.",
         topics: [
           {
             name: "Unit testing fundamentals",
-            problem: "Frameworks, structure, naming.",
+            problem:
+              "Frameworks, structure, naming, precision, edge cases, rounding rules",
           },
           {
-            name: "Testing accounting/financial logic",
-            problem: "Precision, edge cases, rounding rules.",
+            name: "Integration testing",
+            problem: "Integration testing frameworks, structure, naming.",
+          },
+          {
+            name: "End-to-end testing",
+            problem: "End-to-end testing frameworks, structure, naming.",
+          },
+          {
+            name: "User acceptance testing",
+            problem: "User acceptance testing frameworks, structure, naming.",
           },
         ],
       },
@@ -381,6 +327,64 @@ export const topicIndexSections: IndexSection[] = [
             name: "Testing with AI",
             problem:
               "Prompting AI to generate test cases you hadn't thought of.",
+          },
+        ],
+      },
+    ],
+  },
+  {
+    id: "ci-cd-from-scratch",
+    section: "CI/CD from Scratch",
+    description:
+      "CI/CD-ийн үндэс, pipeline, deploy стратеги ба аюулгүй байдал.",
+    groups: [
+      {
+        id: "ci-cd-from-scratch--what-why",
+        name: "CI/CD гэж юу вэ, яагаад хэрэгтэй вэ?",
+        problem: '"It works on my machine" problem.',
+        topics: [
+          {
+            name: "Why CI/CD exists",
+            problem: 'The "it works on my machine" problem.',
+          },
+        ],
+      },
+      {
+        id: "ci-cd-from-scratch--pipeline-basics",
+        name: "Pipeline үндэс",
+        problem: "Build, test, deploy; first pipeline.",
+        topics: [
+          {
+            name: "GitHub Actions fundamentals",
+            problem: "First pipeline: build → test → deploy.",
+          },
+          {
+            name: "Build vs. release pipelines",
+            problem: "Mental model difference.",
+          },
+        ],
+      },
+      {
+        id: "ci-cd-from-scratch--promotion-deploy-strategy",
+        name: "Environment promotion ба deploy стратеги",
+        problem: "Dev → staging → prod; rollbacks; security.",
+        topics: [
+          {
+            name: "Environment promotion gates",
+            problem:
+              "Dev → staging → prod with manual approval (critical for fintech).",
+          },
+          {
+            name: "Rolling vs. blue/green vs. canary",
+            problem: "Which is right for a small team.",
+          },
+          {
+            name: "Automated rollbacks",
+            problem: "What happens when a deploy goes wrong at 2am.",
+          },
+          {
+            name: "Pipeline security",
+            problem: "Secrets in CI, SAST, dependency vulnerability checks.",
           },
         ],
       },
