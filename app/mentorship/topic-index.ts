@@ -393,7 +393,7 @@ export const topicIndexSections: IndexSection[] = [
   {
     id: "software-architecture-design",
     section: "Software Architecture & Design",
-    description: "Архитектурын суурь ойлголт, concurrency, API design.",
+    description: "Нийтлэг хэрэглэгддэг архитектур дизайний ойлголтууд",
     groups: [
       {
         id: "software-architecture-design--event-driven-architecture",
@@ -404,6 +404,10 @@ export const topicIndexSections: IndexSection[] = [
             name: "Event Driven Architecture (queue, dead letter queue)",
             problem:
               "Queues, async processing, DLQ for failed or poison messages.",
+          },
+          {
+            name: "RabbitMQ vs Kafka vs AWS SQS (Cloud Based) vs Upstash (Dedicated Service)",
+            problem: "RabbitMQ vs Kafka vs AWS SQS, when to use which.",
           },
         ],
       },
@@ -439,143 +443,110 @@ export const topicIndexSections: IndexSection[] = [
             problem:
               "REST conventions, versioning, idempotency (critical for disbursements).",
           },
+          {
+            name: "Breaking changes vs. backward compatibility",
+            problem: "When to break backward compatibility.",
+          },
+          {
+            name: "Incremental changes & Obsoletion",
+            problem: "Database schema changes, API changes, obsoletion, etc.",
+          },
+          {
+            name: "GraphQL vs REST",
+            problem: "GraphQL vs REST, when to use which.",
+          },
+        ],
+      },
+      {
+        id: "software-architecture-design--microservices-vs-monolith",
+        name: "Microservices vs Monolith",
+        problem: "Microservices vs Monolith, when to use which.",
+        topics: [
+          {
+            name: "Microservices - How micro do I need?",
+            problem: "How microservices work. How to scale?",
+          },
+          {
+            name: "Monolith - How monolithic do I need?",
+            problem: "How monolithic works. How to scale?",
+          },
+          {
+            name: "Modular Monolith & Mono-repo?",
+            problem: "How to combine and get the best of both worlds.",
+          },
         ],
       },
     ],
   },
   {
-    id: "ai-assisted-development-practical",
-    section: "AI-Assisted Development (Practical)",
-    description: "Cursor/Copilot workflow, ойлгох-тестлэх-review хийх практик.",
+    id: "legacy-code-modernization",
+    section: "Хуучин/эртний/хоцрогдосон кодоо яах вэ?",
+    description:
+      "Одоо хүртэл ажиллаж байгаа чухал системүүдээ хэрхэн орчин үеийн болгох эсвэл хэзээ халах вэ?",
     groups: [
       {
-        id: "ai-assisted-development-practical--copilot-cursor-workflow",
-        name: "Copilot / Cursor workflow",
-        problem: "Autocomplete vs. chat vs. agent mode; when to use which.",
-        topics: [
-          {
-            name: "Copilot / Cursor workflow",
-            problem: "Autocomplete vs. chat vs. agent mode; when to use which.",
-          },
-          {
-            name: "Prompting for typed, enterprise languages",
-            problem: "Getting good output from your stack.",
-          },
-        ],
-      },
-      {
-        id: "ai-assisted-development-practical--understand-test-review",
-        name: "Кодыг ойлгох, тест бичих, review хийх",
-        problem: "Using AI to understand, test, and review code.",
-        topics: [
-          {
-            name: "Using AI to understand unfamiliar code",
-            problem: '"Explain this method," "what are the edge cases?"',
-          },
-          {
-            name: "Using AI to write tests for existing code",
-            problem: "Killer use case for legacy systems.",
-          },
-          {
-            name: "Using AI for code review",
-            problem: "PR review prompts, catching what humans miss.",
-          },
-        ],
-      },
-      {
-        id: "ai-assisted-development-practical--docs-sql-refactor-debug",
-        name: "Documentation, SQL, refactoring, debugging",
+        id: "legacy-code-modernization--fire-slowly-new-services",
+        name: "Fire slowly by moving things to new services",
         problem:
-          "Generated docs, query optimization, safe refactors, rubber duck.",
+          "Strangler fig pattern; extract to new services; incremental migration.",
         topics: [
           {
-            name: "Using AI for documentation",
-            problem: "Generated docs, ADRs, READMEs.",
-          },
-          {
-            name: "Using AI for SQL and DB work",
+            name: "Strangler fig pattern",
             problem:
-              "Query optimization, index suggestions, migration scripts.",
+              "Replace legacy in slices by routing traffic to new services over time.",
           },
           {
-            name: "Using AI for refactoring safely",
+            name: "Extract to new services",
             problem:
-              "Extract method, rename, restructure with tests as safety net.",
+              "When and how to move bounded contexts out of the monolith.",
           },
           {
-            name: "AI for debugging",
-            problem: "Rubber duck on steroids; paste the stack trace.",
-          },
-        ],
-      },
-      {
-        id: "ai-assisted-development-practical--agentic-coding-habits",
-        name: "Agentic coding ба habit-ууд",
-        problem: "Internal tools, agentic coding, AI diff review.",
-        topics: [
-          {
-            name: "Building internal tools with AI",
-            problem: "Rapid prototyping of admin UIs, report generators.",
-          },
-          {
-            name: "Agentic coding",
-            problem: "What it is, when it's ready for production.",
-          },
-          {
-            name: 'The "AI diff review" habit',
-            problem: "Never accepting AI output without reading every line.",
-          },
-        ],
-      },
-    ],
-  },
-  {
-    id: "database-legacy-modernization",
-    section: "Database & Legacy DB Modernization",
-    description: "DB modernize хийх, migration, archiving, AI-тай DB ашиглах.",
-    groups: [
-      {
-        id: "database-legacy-modernization--ai-with-db",
-        name: "DB-тай AI ашиглах",
-        problem: "Stored procedures, queries, indexing with AI.",
-        topics: [
-          {
-            name: "DB-specific AI tooling",
-            problem: "Using AI to write stored procedures, optimize queries.",
-          },
-          {
-            name: "Indexing strategy with AI assistance",
-            problem: "Letting AI suggest and explain index choices.",
+            name: "Incremental migration without big bang",
+            problem: "Rollout and feature flags; coexistence of old and new.",
           },
         ],
       },
       {
-        id: "database-legacy-modernization--migrations-schema",
-        name: "Migrations ба schema",
-        problem: "Version control your schema; read replicas.",
+        id: "legacy-code-modernization--upgrade-within-itself",
+        name: "Start upgrading within itself",
+        problem: "In-place refactoring; modernize inside the monolith first.",
         topics: [
           {
-            name: "Database migrations as code",
-            problem: "Flyway, Liquibase — version control your schema.",
+            name: "In-place refactoring",
+            problem:
+              "Improve structure, tests, and dependencies without moving code out.",
           },
           {
-            name: "Read replicas and reporting DBs",
-            problem: "Stop hammering the transactional DB for reports.",
+            name: "Modernize dependencies and runtime",
+            problem:
+              "Upgrade frameworks, language version, and libraries safely.",
+          },
+          {
+            name: "Modularize before extracting",
+            problem: "Clear boundaries inside the monolith before splitting.",
           },
         ],
       },
       {
-        id: "database-legacy-modernization--archiving-migration",
-        name: "Archiving ба migration",
-        problem: "Retention, compliance; legacy DB → alternatives.",
+        id: "legacy-code-modernization--must-mention",
+        name: "When to rewrite, risk, and testing",
+        problem:
+          "Rewrite vs. refactor; risk and rollout; testing legacy before touching.",
         topics: [
           {
-            name: "Data archiving strategies",
-            problem: "Retention, regulatory compliance.",
+            name: "When to rewrite vs. refactor",
+            problem:
+              "Cost and risk of full rewrite; when incremental is better.",
           },
           {
-            name: "Legacy DB → alternatives path",
-            problem: "Migration considerations (e.g. PostgreSQL).",
+            name: "Risk and rollout strategy",
+            problem:
+              "Canary, feature flags, rollback; not breaking production.",
+          },
+          {
+            name: "Testing the legacy before touching it",
+            problem:
+              "Characterization tests, safety net, and regression coverage.",
           },
         ],
       },
@@ -715,6 +686,11 @@ export const topicIndexSections: IndexSection[] = [
           {
             name: "Trunk-based vs. Gitflow",
             problem: "What works for a 2–3 person team.",
+          },
+          {
+            name: "Feature flags & A/B testing",
+            problem:
+              "Safer rollouts, kill switches, experiments, and measuring impact without risking production.",
           },
         ],
       },
