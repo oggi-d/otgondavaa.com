@@ -1,0 +1,66 @@
+---
+title: "CI/CD from Scratch"
+---
+
+## CI/CD гэж юу вэ, яагаад хэрэгтэй вэ?
+
+**Continuous Integration / Continuous Deployment** — код өөрчлөлт бүрийг автоматаар шалгаж, аюулгүй болсны дараа орчнуудад (dev → staging → prod) deploy хийх практик.
+
+### "Миний машинд ажилладаг" асуудал
+
+- Өөр орчин, өөр dependency, өөр тохиргоо нь production дээр алдаа гаргана.
+- CI/CD нь **нэгдсэн орчинд** build, test, deploy хийгээд "миний машинд" болон "бусдын машинд" ялгааг арилгана.
+- Хийж буй өөрчлөлт бүр төвлөрсөн pipeline-аар дамжина — ингэснээр чанар, аюулгүй байдал нэгдсэн байна.
+
+---
+
+## Pipeline үндэс
+
+Pipeline гэдэг нь: **код оруулах → build → test → (шаардлагатай бол) deploy** гэсэн алхмуудын цуваа.
+
+### GitHub Actions-ийн үндэс
+
+- Workflow файл (`.github/workflows/*.yml`) тодорхойлно: trigger (push/PR), job-ууд, step-үүд.
+- Эхний pipeline: `build` → `lint` → `test` → (optional) `deploy`.
+- Secret-уудыг repo-ын Settings → Secrets-аас тохируулж, workflow дотор `${{ secrets.NAME }}` гэж ашиглана.
+
+### Cloud DevOps Pipelines
+
+- Azure DevOps, GitLab CI гэх мэт платформууд ижил санааг ашиглана: YAML (эсвэл UI) дээр pipeline тодорхойлно.
+- Таны байгууллага аль платформ ашиглаж байгаагаас хамаарч нэг сонголтыг эзэмшиж, дараа нь орчнууд руу deploy-ийг холбоно.
+
+### Build vs. release pipeline
+
+- **Build pipeline**: код compile/package хийх, test ажиллуулах. Өөрчлөлт бүрт ажиллана.
+- **Release pipeline**: бэлэн артефактыг тодорхой орчинд (staging, prod) deploy хийх. Ихэвчлен тусдаа trigger, approval шаардагддаг.
+
+---
+
+## Environment promotion ба deploy стратеги
+
+### Dev → Staging → Prod
+
+- **Dev**: хамгийн олон өөрчлөлт ордог; автомат deploy болж болно.
+- **Staging**: production-тэй ижил (эсвэл ойр) орчин; manual approval эсвэл gate-ээр дамжуулна.
+- **Prod**: сүүлчийн gate — ялангуяа fintech, санхүүгийн системд manual approval ихэвчлен зайлшгүй.
+
+### Rolling vs. blue/green vs. canary
+
+- **Rolling**: шинэ хувилбарыг бага багаар солих; энгийн, бага нөөцтэй багт тохиромжтой.
+- **Blue/green**: хоёр ижил орчин; нэгийг нь солиод трафикийг шилжүүлнэ. Rollback хурдан.
+- **Canary**: трафикийн бага хувийг шинэ хувилбар руу өгч, дараа нь бүхэлд нь шилжүүлнэ. Илүү нарийн хяналттай.
+
+Жижиг баг, энгийн системд эхлээд **rolling** эсвэл **blue/green** сонгож, шаардлага болвол canary нэмж болно.
+
+### Автомат rollback
+
+- Health check, error rate, latency-г хэмжиж: алдаа илэрвэл автоматаар өмнөх хувилбар руу буцаах.
+- "2 цагт deploy буруу болсон" гэх мэт тохиолдолд хүний сэрэхээс өмнө систем өөрөө буцааж болно.
+
+### Pipeline-ийн аюулгүй байдал
+
+- **Secrets**: CI дотор нууц үг, API key-г хадгалахдаа платформын Secret store ашиглах; код руу хэзээ ч бичиж оруулахгүй.
+- **SAST**: Static Application Security Testing — кодыг scan хийж аюултай загваруудыг илрүүлнэ.
+- **Dependency check**: npm audit, Dependabot гэх мэтээр dependency-ийн уязвибалити шалгана.
+
+CI/CD нь зөвхөн "автомат deploy" биш — **чанар, аюулгүй байдал, хамтын ажиллагааг** нэгдсэн процесс болгох үндэс юм.

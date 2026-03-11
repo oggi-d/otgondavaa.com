@@ -2,6 +2,30 @@
 title: "Developer Tooling Upgrades"
 ---
 
+## Cursor Хэрхэн ажилладаг вэ?
+
+---
+
+Cursor: Hey, can you create a new markdown document as the user requested?
+By the way, here’s a list of available instructions and the functions you can call.
+Also, here are the files explicitly added to the context.
+
+LLM: fetch_rules(rule_names=["relevant-rule-id"])
+– it looks like there’s a rule that matches the request.
+I need to know its details before I can proceed.
+
+Cursor: Here you go.
+
+LLM: edit_file(target_file="path/to/file.md", instructions="create a new markdown document", code_edit="...")
+– now I have all the information I need.
+Let’s create that new markdown document.
+
+Cursor: Done!
+
+---
+
+Уг жишээг [Cursor-under-the-hood](https://roman.pt/posts/cursor-under-the-hood/) -ээс авсан.
+
 ## Mentorship task: “AI-powered tooling”-оо production-ready болго
 
 ### 1) Local AI IDE-ээ тохируул
