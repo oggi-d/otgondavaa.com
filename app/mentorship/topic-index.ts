@@ -391,12 +391,12 @@ export const topicIndexSections: IndexSection[] = [
     ],
   },
   {
-    id: "software-architecture-design",
-    section: "Software Architecture & Design",
+    id: "software-design-best-practices",
+    section: "Software Design & Techniques & Best Practices",
     description: "Нийтлэг хэрэглэгддэг архитектур дизайний ойлголтууд",
     groups: [
       {
-        id: "software-architecture-design--event-driven-architecture",
+        id: "software-design-best-practices--event-driven-architecture",
         name: "Event Driven Architecture",
         problem: "Queues, async processing, DLQ.",
         topics: [
@@ -412,7 +412,7 @@ export const topicIndexSections: IndexSection[] = [
         ],
       },
       {
-        id: "software-architecture-design--concurrency-locking",
+        id: "software-design-best-practices--concurrency-locking",
         name: "Concurrency ба lock-ууд",
         problem: "Idempotency, optimistic/pessimistic locking.",
         topics: [
@@ -434,7 +434,7 @@ export const topicIndexSections: IndexSection[] = [
         ],
       },
       {
-        id: "software-architecture-design--api-design",
+        id: "software-design-best-practices--api-design",
         name: "API design",
         problem: "REST conventions, versioning, idempotency.",
         topics: [
@@ -458,7 +458,7 @@ export const topicIndexSections: IndexSection[] = [
         ],
       },
       {
-        id: "software-architecture-design--microservices-vs-monolith",
+        id: "software-design-best-practices--microservices-vs-monolith",
         name: "Microservices vs Monolith",
         problem: "Microservices vs Monolith, when to use which.",
         topics: [
@@ -476,11 +476,148 @@ export const topicIndexSections: IndexSection[] = [
           },
         ],
       },
+      {
+        id: "software-design-best-practices--data-science",
+        name: "Data Science",
+        problem: "Data science & Data Warehouse & Data Pipeline & Tools.",
+        topics: [
+          {
+            name: "Data & Data science",
+            problem: "Data science гэж юу вэ? Хэрхэн ашиглагддаг вэ?",
+          },
+          {
+            name: "Data Warehouse",
+            problem:
+              "BigQuery & Business Intelligence Platforms (Metabase, Lightdash, Apache Superset, etc.)",
+          },
+          {
+            name: "Data Pipeline",
+            problem: "Airflow, Fivetran, etc.",
+          },
+        ],
+      },
+    ],
+  },
+  {
+    id: "observability-operations",
+    section: "Observability & Operations",
+    description: "Logs/metrics/traces, alerting/SLO, incident response.",
+    groups: [
+      {
+        id: "observability-operations--logs-metrics-traces",
+        name: "Logs, metrics, traces",
+        problem: "Three pillars; structured logging; APM.",
+        topics: [
+          {
+            name: "Logging properly",
+            problem: "Structured logging, correlation IDs across requests.",
+          },
+          {
+            name: "The three pillars: logs, metrics, traces",
+            problem: "Conceptual foundation.",
+          },
+          {
+            name: "Application Performance Monitoring (APM)",
+            problem: "Commercial or open-source (Seq, Grafana).",
+          },
+        ],
+      },
+      {
+        id: "observability-operations--alerting-slo",
+        name: "Alerting ба SLO",
+        problem: "What wakes someone at 3am; health checks; error budgets.",
+        topics: [
+          {
+            name: "Alerting strategy",
+            problem: "What should wake someone at 3am vs. what can wait.",
+          },
+          {
+            name: "Health checks and readiness probes",
+            problem: "Knowing your service is alive before users tell you.",
+          },
+          {
+            name: "Error budgets and SLOs",
+            problem: "Lightweight version for a small team.",
+          },
+        ],
+      },
+      {
+        id: "observability-operations--incident-response",
+        name: "Incident response",
+        problem: "Runbooks, postmortems, blameless culture.",
+        topics: [
+          {
+            name: "Incident response basics",
+            problem: "Runbooks, postmortems, blameless culture.",
+          },
+        ],
+      },
+    ],
+  },
+  {
+    id: "team-process",
+    section: "Team & Process",
+    description: "Team-ийн процесс: code review, бичиг баримт, on-call, DoD.",
+    groups: [
+      {
+        id: "team-process--code-review-git-workflow",
+        name: "Code review ба Git workflow",
+        problem: "Giving and receiving feedback; trunk-based vs Gitflow.",
+        topics: [
+          {
+            name: "Code review culture",
+            problem: "Giving and receiving feedback; AI as first reviewer.",
+          },
+          {
+            name: "Trunk-based vs. Gitflow",
+            problem: "What works for a 2–3 person team.",
+          },
+          {
+            name: "Feature flags & A/B testing",
+            problem:
+              "Safer rollouts, kill switches, experiments, and measuring impact without risking production.",
+          },
+        ],
+      },
+      {
+        id: "team-process--documentation-tech-debt",
+        name: "Documentation ба technical debt",
+        problem: "ADRs; technical debt as financial metaphor.",
+        topics: [
+          {
+            name: "Architecture Decision Records (ADRs)",
+            problem: "Lightweight documentation that lasts.",
+          },
+          {
+            name: "Technical debt as a financial metaphor",
+            problem: "Interest and principal.",
+          },
+        ],
+      },
+      {
+        id: "team-process--oncall-pair-mob-dod",
+        name: "On-call, pair/mob, Definition of Done",
+        problem: "Runbooks, pairing during AI sessions, formalizing done.",
+        topics: [
+          {
+            name: "On-call rotation and runbooks",
+            problem: "Someone needs to be responsible even on a small team.",
+          },
+          {
+            name: "Pair and mob programming",
+            problem: "Especially useful during AI-assisted sessions.",
+          },
+          {
+            name: "Definition of Done",
+            problem: 'Formalizing what "finished" means.',
+          },
+        ],
+      },
     ],
   },
   {
     id: "legacy-code-modernization",
-    section: "Хуучин/эртний/хоцрогдосон кодоо яах вэ?",
+    section: "Хуучин кодоо яах вэ?",
     description:
       "Одоо хүртэл ажиллаж байгаа чухал системүүдээ хэрхэн орчин үеийн болгох эсвэл хэзээ халах вэ?",
     groups: [
@@ -547,184 +684,6 @@ export const topicIndexSections: IndexSection[] = [
             name: "Testing the legacy before touching it",
             problem:
               "Characterization tests, safety net, and regression coverage.",
-          },
-        ],
-      },
-    ],
-  },
-  {
-    id: "observability-operations",
-    section: "Observability & Operations",
-    description: "Logs/metrics/traces, alerting/SLO, incident response.",
-    groups: [
-      {
-        id: "observability-operations--logs-metrics-traces",
-        name: "Logs, metrics, traces",
-        problem: "Three pillars; structured logging; APM.",
-        topics: [
-          {
-            name: "Logging properly",
-            problem: "Structured logging, correlation IDs across requests.",
-          },
-          {
-            name: "The three pillars: logs, metrics, traces",
-            problem: "Conceptual foundation.",
-          },
-          {
-            name: "Application Performance Monitoring (APM)",
-            problem: "Commercial or open-source (Seq, Grafana).",
-          },
-        ],
-      },
-      {
-        id: "observability-operations--alerting-slo",
-        name: "Alerting ба SLO",
-        problem: "What wakes someone at 3am; health checks; error budgets.",
-        topics: [
-          {
-            name: "Alerting strategy",
-            problem: "What should wake someone at 3am vs. what can wait.",
-          },
-          {
-            name: "Health checks and readiness probes",
-            problem: "Knowing your service is alive before users tell you.",
-          },
-          {
-            name: "Error budgets and SLOs",
-            problem: "Lightweight version for a small team.",
-          },
-        ],
-      },
-      {
-        id: "observability-operations--incident-response",
-        name: "Incident response",
-        problem: "Runbooks, postmortems, blameless culture.",
-        topics: [
-          {
-            name: "Incident response basics",
-            problem: "Runbooks, postmortems, blameless culture.",
-          },
-        ],
-      },
-    ],
-  },
-  {
-    id: "cloud-infrastructure",
-    section: "Cloud & Infrastructure",
-    description: "Cloud суурь ойлголт, IaC, container, automation ба cost/DR.",
-    groups: [
-      {
-        id: "cloud-infrastructure--cloud-basics",
-        name: "Cloud үндэс",
-        problem: "Compute, storage, networking mental models.",
-        topics: [
-          {
-            name: "Cloud fundamentals",
-            problem: "Compute, storage, networking mental models.",
-          },
-          {
-            name: "Managed vs. self-hosted",
-            problem: "When to let the cloud handle it.",
-          },
-        ],
-      },
-      {
-        id: "cloud-infrastructure--iac-containers",
-        name: "Infrastructure as Code ба container",
-        problem: "Terraform; Docker; Kubernetes concepts.",
-        topics: [
-          {
-            name: "Infrastructure as Code intro",
-            problem: "Terraform or cloud-native; stop clicking in the portal.",
-          },
-          {
-            name: "Containerization with Docker",
-            problem: "Dockerizing an app from scratch.",
-          },
-          {
-            name: "Container orchestration lite",
-            problem: "Kubernetes concepts vs. simpler managed options.",
-          },
-        ],
-      },
-      {
-        id: "cloud-infrastructure--automation-cost-dr",
-        name: "Automation, cost, DR",
-        problem: "Cloud agents; tagging, budgets; RTO/RPO.",
-        topics: [
-          {
-            name: "Cloud agents + automation",
-            problem:
-              "Agents that provision, scale, or remediate; automation beyond IaC.",
-          },
-          {
-            name: "Cost management basics",
-            problem: "Tagging, budgets, right-sizing.",
-          },
-          {
-            name: "Disaster recovery planning",
-            problem: "RTO/RPO, backup strategies.",
-          },
-        ],
-      },
-    ],
-  },
-  {
-    id: "team-process",
-    section: "Team & Process",
-    description: "Team-ийн процесс: code review, бичиг баримт, on-call, DoD.",
-    groups: [
-      {
-        id: "team-process--code-review-git-workflow",
-        name: "Code review ба Git workflow",
-        problem: "Giving and receiving feedback; trunk-based vs Gitflow.",
-        topics: [
-          {
-            name: "Code review culture",
-            problem: "Giving and receiving feedback; AI as first reviewer.",
-          },
-          {
-            name: "Trunk-based vs. Gitflow",
-            problem: "What works for a 2–3 person team.",
-          },
-          {
-            name: "Feature flags & A/B testing",
-            problem:
-              "Safer rollouts, kill switches, experiments, and measuring impact without risking production.",
-          },
-        ],
-      },
-      {
-        id: "team-process--documentation-tech-debt",
-        name: "Documentation ба technical debt",
-        problem: "ADRs; technical debt as financial metaphor.",
-        topics: [
-          {
-            name: "Architecture Decision Records (ADRs)",
-            problem: "Lightweight documentation that lasts.",
-          },
-          {
-            name: "Technical debt as a financial metaphor",
-            problem: "Interest and principal.",
-          },
-        ],
-      },
-      {
-        id: "team-process--oncall-pair-mob-dod",
-        name: "On-call, pair/mob, Definition of Done",
-        problem: "Runbooks, pairing during AI sessions, formalizing done.",
-        topics: [
-          {
-            name: "On-call rotation and runbooks",
-            problem: "Someone needs to be responsible even on a small team.",
-          },
-          {
-            name: "Pair and mob programming",
-            problem: "Especially useful during AI-assisted sessions.",
-          },
-          {
-            name: "Definition of Done",
-            problem: 'Formalizing what "finished" means.',
           },
         ],
       },

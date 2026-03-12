@@ -1,5 +1,14 @@
 import type { LucideIcon } from "lucide-react";
-import { Brain, GitBranch, List, TestTube, Wrench } from "lucide-react";
+import {
+  Activity,
+  Brain,
+  GitBranch,
+  Layers,
+  List,
+  TestTube,
+  Users,
+  Wrench,
+} from "lucide-react";
 import { getSectionById } from "./topic-index";
 
 export interface MentorshipTopic {
@@ -71,6 +80,43 @@ export const mentorshipTopics: MentorshipTopic[] = [
     slug: "ci-cd-from-scratch",
     gradient: "from-emerald-500 via-teal-500 to-cyan-600",
     accentColor: "text-emerald-600",
+  },
+  {
+    title: getSectionById("software-design-best-practices").section,
+    description:
+      getSectionById("software-design-best-practices").description || "",
+    href: `/mentorship/${getSectionById("software-design-best-practices").id}`,
+    icon: Layers,
+    slug: "software-design-best-practices",
+    gradient: "from-indigo-500 via-blue-500 to-sky-600",
+    accentColor: "text-indigo-600",
+  },
+  {
+    title: getSectionById("observability-operations").section,
+    description: getSectionById("observability-operations").description || "",
+    href: `/mentorship/${getSectionById("observability-operations").id}`,
+    icon: Activity,
+    slug: "observability-operations",
+    gradient: "from-fuchsia-500 via-pink-500 to-rose-600",
+    accentColor: "text-fuchsia-600",
+  },
+  {
+    title: getSectionById("team-process").section,
+    description: getSectionById("team-process").description || "",
+    href: `/mentorship/${getSectionById("team-process").id}`,
+    icon: Users,
+    slug: "team-process",
+    gradient: "from-lime-500 via-lime-600 to-green-700",
+    accentColor: "text-lime-700",
+  },
+  {
+    title: getSectionById("legacy-code-modernization").section,
+    description: getSectionById("legacy-code-modernization").description || "",
+    href: `/mentorship/${getSectionById("legacy-code-modernization").id}`,
+    icon: Users,
+    slug: "legacy-code-modernization",
+    gradient: "from-stone-700 via-neutral-600 to-zinc-500",
+    accentColor: "text-zinc-600",
   },
 ];
 

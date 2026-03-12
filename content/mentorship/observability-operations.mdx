@@ -1,0 +1,102 @@
+---
+title: "Observability & Operations"
+---
+
+## Observability гэж юу вэ?
+
+“Observability” гэдэг нь системийн **дотоод төлөв** (юу болоод өнгөрөв, яг одоо юу болж байна, удахгүй юу болох магадлалтай вэ?)‑ийг зөвхөн гаднаас нь ажиглах өгөгдлөөр (logs/metrics/traces) **оношлох чадвар** юм.
+
+Практик дээр энэ нь:
+
+- Production дээр “юу эвдэрсэн бэ?”‑г хурдан олж тогтоох
+- “ямар хэрэглэгч/ямар request дээр?” гэдгийг холбож харах
+- “үнэхээр засагдсан уу?” гэдгийг хэмжиж баталгаажуулах
+
+## Logs / Metrics / Traces — 3 тулгуур
+
+### Logs
+
+- **Structured log** (JSON гэх мэт) ашиглах
+- **Correlation ID / Request ID** нэмэх (request‑уудыг хооронд нь холбох)
+- **Log level** (debug/info/warn/error)‑ээ стандартчилах
+
+### Metrics
+
+- Хэмжигдэхүйц тоонууд: latency, error rate, throughput, saturation
+- “Юу болж байна?” гэдгийг трендээр харуулна
+
+### Traces
+
+- Нэг request олон service‑ээр хэрхэн дамжсаныг харуулна
+- Bottleneck, slow dependency‑г хурдан олно
+
+## Alerting, SLO, On-call — бодит амьдрал
+
+- **Alert**: “3AM-д сэрээх” дохио, хэт олон/хэт дутуу байж болохгүй
+- **SLO**: хэрэглэгчийн мэдрэмжид ойр зорилт (жишээ: 99.9% амжилттай request)
+- **Error budget**: reliability‑ийн “зарцуулж болох” хэсэг — feature vs stability‑ийн яриаг бодит болгодог
+
+---
+
+## Homework — Self-hosted Observability tool суулгаад webapp‑аа log push хийлгэ
+
+### 0) Зорилго
+
+Энэ даалгаврын зорилго нь “production‑д асуудал гарвал **5–10 минутын дотор** лог дээрээс оношлох боломжтой” хамгийн анхны суурийг тавих.
+
+### 1) Нэг self-hostable tool сонго
+
+Доорх сонголтуудаас **аль нэгийг** сонго (аль нь ч болно).
+
+- **Grafana Loki** (logs)
+- **OpenObserve** (logs + search UI)
+- **SigNoz** (traces/metrics/logs)
+- **Sentry self-hosted** (error + performance events)
+- **Seq** (logs; self-host боломжтой)
+
+**Шаардлага**: локал дээр Docker Compose‑оор босдог, web UI‑тай, ingestion endpoint‑той байх.
+
+### 2) Tool‑оо локал дээр асаа (Docker Compose)
+
+- `docker compose up -d` ажиллуулж UI нь нээгдэж байгааг баталгаажуул
+- Ingestion endpoint‑ийнхоо URL, auth хэрэгтэй эсэхийг тэмдэглэ
+
+**Баталгаажуулалт**:
+
+- UI‑ийн screenshot
+- “ingest endpoint”‑ийн URL (жишээ: `/api/push`, `/api/v1/logs`, гэх мэт)
+
+### 3) Webapp‑аасаа log push хийх хамгийн жижиг pipeline хий
+
+Доорх минимал шаардлагыг биелүүл.
+
+- **Нэг сервер талын endpoint** нэм (Next.js route handler гэх мэт)
+  - Endpoint нь test log үүсгээд сонгосон tool руугаа илгээнэ
+- Log дээр **дор хаяж** дараах талбарууд байхаар structured хэлбэрээр явуул:
+  - `timestamp`
+  - `level`
+  - `message`
+  - `service` (эсвэл `app`)
+  - `requestId` (эсвэл `traceId`)
+  - `path` (аль endpoint дээрээс)
+- Tool‑ийн UI дээрээс “message”‑ээр хайхад гарч ирдэг байх
+
+**Зөвлөмж (production‑ready болгох жижиг зүйлс)**:
+
+- Network failure үед request‑ээ унагаахгүй (log push‑ийг best-effort)
+- Secret/token ашиглаж байгаа бол `.env`‑ээр (repo‑д commit хийхгүй)
+
+### 4) Dashboard эсвэл query save хий
+
+- “Сүүлийн 15 минутын `error` log” гэсэн query (эсвэл saved search) үүсгэ
+- Нэг error log зориуд үүсгээд (жишээ: try/catch дотор `level=error`) UI дээр харагдаж байгааг шалга
+
+### 5) Баталгаажуулалт (deliverables)
+
+Дараах 4 зүйлээ бэлд:
+
+- Сонгосон tool‑ын нэр + docker compose ажиллаж байгаа screenshot
+- Webapp‑ын log push хийдэг endpoint/кодны хэсэг (repo дээр)
+- Tool‑ын UI дээр log орж ирсэн screenshot (query‑тэйгээ)
+- 5–10 мөрийн тайлбар: “Production дээр асуудал гарахад үүнийг яаж ашиглах вэ?”
+

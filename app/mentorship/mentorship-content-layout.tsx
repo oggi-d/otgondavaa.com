@@ -2,6 +2,7 @@ import Link from "next/link";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
+import { getTopicBySlug } from "./topics";
 import type { IndexSection } from "./topic-index";
 
 interface MentorshipContentLayoutProps {
@@ -42,7 +43,11 @@ export function MentorshipContentLayout({
           </h1>
 
           <div className="grid gap-6 sm:gap-8">
-            {sections.map((sec) => (
+            {sections.map((sec) => {
+              const sectionHref = isIntro
+                ? (getTopicBySlug(sec.id) ? `/mentorship/${sec.id}` : "#")
+                : null;
+              return (
               <Card
                 key={sec.id}
                 className={cn(
@@ -58,10 +63,19 @@ export function MentorshipContentLayout({
                     />
                     <div className="min-w-0">
                       <h2
-                        className="text-base font-semibold tracking-tight text-foreground sm:text-lg"
+                        className="scroll-mt-24 text-base font-semibold tracking-tight text-foreground sm:text-lg"
                         id={`${sec.id}-title`}
                       >
-                        {sec.section}
+                        {sectionHref != null ? (
+                          <Link
+                            href={sectionHref}
+                            className="hover:underline focus:underline focus:outline-none"
+                          >
+                            {sec.section}
+                          </Link>
+                        ) : (
+                          sec.section
+                        )}
                       </h2>
                       {sec.description ? (
                         <p
@@ -77,21 +91,39 @@ export function MentorshipContentLayout({
                 <CardContent className="px-6 pb-6 pt-0">
                   {isIntro ? (
                     <ul className="space-y-3">
-                      {sec.groups.map((g) => (
+                      {sec.groups.map((g) => {
+                        const groupHref = sectionHref === "#" ? "#" : sectionHref ? `${sectionHref}#${g.id}-title` : null;
+                        return (
                         <li
                           key={g.id}
                           className="flex gap-3 text-sm leading-relaxed"
-                          aria-labelledby={`${g.id}-title`}
-                          aria-describedby={g.problem ? `${g.id}-desc` : undefined}
+                          aria-labelledby={groupHref ? undefined : `${g.id}-title`}
+                          aria-describedby={g.problem && !groupHref ? `${g.id}-desc` : undefined}
                         >
                           <span
                             className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-violet-400/70 dark:bg-violet-400/50"
                             aria-hidden
                           />
                           <span>
-                            <span className="font-medium text-foreground">
-                              <span id={`${g.id}-title`}>{g.name}</span>
-                            </span>
+                            {groupHref != null ? (
+                              <Link
+                                href={groupHref}
+                                className="font-medium text-foreground hover:underline focus:underline focus:outline-none"
+                              >
+                                <span
+                                  id={groupHref !== "#" ? `${g.id}-title` : undefined}
+                                  className={groupHref !== "#" ? "scroll-mt-24" : undefined}
+                                >
+                                  {g.name}
+                                </span>
+                              </Link>
+                            ) : (
+                              <span className="font-medium text-foreground">
+                                <span id={`${g.id}-title`} className="scroll-mt-24">
+                                  {g.name}
+                                </span>
+                              </span>
+                            )}
                             {g.problem ? (
                               <span className="text-muted-foreground" id={`${g.id}-desc`}>
                                 {" — "}
@@ -100,7 +132,8 @@ export function MentorshipContentLayout({
                             ) : null}
                           </span>
                         </li>
-                      ))}
+                        );
+                      })}
                     </ul>
                   ) : (
                     <div className="space-y-6">
@@ -113,7 +146,9 @@ export function MentorshipContentLayout({
                             />
                             <div>
                               <span className="font-semibold text-foreground text-sm">
-                                <span id={`${g.id}-title`}>{g.name}</span>
+                                <span id={`${g.id}-title`} className="scroll-mt-24">
+                                  {g.name}
+                                </span>
                               </span>
                               {g.problem ? (
                                 <span className="text-muted-foreground text-sm">
@@ -151,7 +186,8 @@ export function MentorshipContentLayout({
                   )}
                 </CardContent>
               </Card>
-            ))}
+              );
+            })}
           </div>
 
           {children ? (
