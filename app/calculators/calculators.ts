@@ -1,4 +1,4 @@
-import { PiggyBank, LucideIcon, CoinsIcon } from "lucide-react";
+import { PiggyBank, LucideIcon, CoinsIcon, Sparkles } from "lucide-react";
 
 export interface Calculator {
   title: string;
@@ -36,6 +36,17 @@ export const calculators: Calculator[] = [
     gradient: "from-emerald-400 via-green-400 to-teal-500",
     iconBg: "bg-emerald-500",
     accentColor: "text-emerald-600",
+  },
+  {
+    title: "Урт хугацааны хуримтлал",
+    description:
+      "Нийлмэл хүү (Хүүгээс хүү бодох)-ийн нөлөөг жишээлэн, инфляц ба татварыг тооцсон үлдэгдлийг жилээр харуулна.",
+    href: "/calculators/long-term-savings",
+    icon: Sparkles,
+    slug: "long-term-savings",
+    gradient: "from-violet-400 via-fuchsia-400 to-pink-500",
+    iconBg: "bg-violet-500",
+    accentColor: "text-violet-600",
   },
 ];
 

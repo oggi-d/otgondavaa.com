@@ -77,7 +77,7 @@ function saveToStorage(inputs: LoanInputs) {
   }
 }
 
-export function LoanCalculator() {
+export function CalculatorLoan() {
   const [isHydrated, setIsHydrated] = React.useState(false);
   const [loanAmount, setLoanAmount] = React.useState(defaultInputs.loanAmount);
   const [annualRate, setAnnualRate] = React.useState(defaultInputs.annualRate);

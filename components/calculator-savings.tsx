@@ -68,7 +68,7 @@ function saveToStorage(inputs: SavingsInputs) {
   }
 }
 
-export function SavingsCalculator() {
+export function CalculatorSavings() {
   const [isHydrated, setIsHydrated] = React.useState(false);
   const [currentSavings, setCurrentSavings] = React.useState(
     defaultInputs.currentSavings,

@@ -72,7 +72,7 @@ Footer.tsx
 MDXComponents.tsx // maps custom mdx components to shadcn UI
 CalculatorCard.tsx
 MortgageCalculator.tsx
-SavingsCalculator.tsx
+calculator-savings.tsx (CalculatorSavings)
 /lib
 mdx.ts
 brevo.ts // small wrapper for Brevo calls

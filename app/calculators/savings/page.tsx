@@ -1,4 +1,4 @@
-import { SavingsCalculator } from "@/components/savings-calculator";
+import { CalculatorSavings } from "@/components/calculator-savings";
 import { getCalculatorBySlug } from "../calculators";
 import { CalculatorLayout } from "../calculator-layout";
 import { getCalculatorMetadata } from "../shared-metadata";
@@ -40,7 +40,7 @@ export default function SavingsCalculatorPage() {
       gradient={calculator.gradient}
       iconBg={calculator.iconBg}
     >
-      <SavingsCalculator />
+      <CalculatorSavings />
     </CalculatorLayout>
   );
 }

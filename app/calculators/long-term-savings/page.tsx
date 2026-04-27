@@ -1,21 +1,21 @@
-import { CalculatorLoan } from "@/components/calculator-loan";
+import { CalculatorLongTermSavings } from "@/components/calculator-long-term-savings";
 import { getCalculatorBySlug } from "../calculators";
 import { CalculatorLayout } from "../calculator-layout";
 import { getCalculatorMetadata } from "../shared-metadata";
 
-const calculator = getCalculatorBySlug("loan");
-const path = "/calculators/loan";
+const calculator = getCalculatorBySlug("long-term-savings");
+const path = "/calculators/long-term-savings";
 
 export const metadata = getCalculatorMetadata({
-  title: `${calculator?.title || "Зээлийн тооцоолуур"} - Otgondavaa`,
+  title: `${calculator?.title || "Урт хугацааны хуримтлал"} - Otgondavaa`,
   description:
     calculator?.description ||
-    "Сарын зээлийн төлбөр, нийт хүүг тооцоолж, нэмэлт төлбөр хэрхэн жил хэмнэдгийг хараарай.",
+    "Нийлмэл хүү (Хүүгээс хүү бодох) хэрхэн ажиллаж, инфляц ба татварын дараах бодит өсөлтийг жилээр харуулна.",
   path,
   ogTitle: calculator?.title,
 });
 
-export default function LoanCalculatorPage() {
+export default function LongTermSavingsCalculatorPage() {
   if (!calculator) return null;
 
   const siteUrl =
@@ -40,7 +40,8 @@ export default function LoanCalculatorPage() {
       gradient={calculator.gradient}
       iconBg={calculator.iconBg}
     >
-      <CalculatorLoan />
+      <CalculatorLongTermSavings />
     </CalculatorLayout>
   );
 }
+
