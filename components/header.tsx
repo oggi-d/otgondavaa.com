@@ -12,6 +12,7 @@ import {
   X,
   Home,
   BookOpen,
+  Briefcase,
   Calculator,
   GraduationCap,
   Mail,
@@ -19,6 +20,7 @@ import {
 
 const navItems = [
   { href: "/", label: "Нүүр", icon: Home },
+  { href: "/recruiters", label: "Résumé", icon: Briefcase },
   { href: "/blog", label: "Блог", icon: BookOpen },
   { href: "/mentorship", label: "Сургалт", icon: GraduationCap },
   { href: "/calculators", label: "Тооцоолуур", icon: Calculator },

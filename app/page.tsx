@@ -2,6 +2,7 @@ import Link from "next/link";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { ButtonLink } from "@/components/ui/button-link";
 import { BlogCard } from "@/components/blog-card";
+import { RecruiterBanner } from "@/components/recruiter-banner";
 import { SubscribeCard } from "@/components/subscribe-card";
 import { getLatestPosts } from "@/lib/mdx";
 import { ArrowRight } from "lucide-react";
@@ -27,7 +28,9 @@ export default function Home() {
   const latestPosts = getLatestPosts(2);
 
   return (
-    <div className="container mx-auto px-4 py-12">
+    <>
+      <RecruiterBanner />
+      <div className="container mx-auto px-4 py-12">
       {/* Hero Section */}
       <section className="mb-16 text-center">
         <Avatar className="mx-auto mb-6 h-32 w-32">
@@ -47,7 +50,10 @@ export default function Home() {
           .
         </p>
         <div className="flex flex-wrap justify-center gap-4">
-          <ButtonLink href="/blog" variant="default">
+          <ButtonLink href="/recruiters" variant="default">
+            🇺🇸 Résumé for recruiters (English)
+          </ButtonLink>
+          <ButtonLink href="/blog" variant="outline">
             Миний блогийг унших
           </ButtonLink>
           <ButtonLink href="/calculators" variant="outline">
@@ -74,6 +80,7 @@ export default function Home() {
           <SubscribeCard className="flex h-full flex-col" />
         </div>
       </section>
-    </div>
+      </div>
+    </>
   );
 }
