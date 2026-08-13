@@ -9,8 +9,25 @@ export interface BlogPost {
   summary: string;
   tags: string[];
   coverImage?: string;
+  coverWidth?: number;
+  coverHeight?: number;
   draft?: boolean;
   content: string;
+}
+
+function parseOptionalNumber(value: unknown): number | undefined {
+  if (typeof value === "number" && Number.isFinite(value)) {
+    return value;
+  }
+
+  if (typeof value === "string" && value.trim() !== "") {
+    const parsed = Number(value);
+    if (Number.isFinite(parsed)) {
+      return parsed;
+    }
+  }
+
+  return undefined;
 }
 
 const postsDirectory = path.join(process.cwd(), "content/posts");
@@ -47,6 +64,8 @@ export function getPostBySlug(slug: string): BlogPost | null {
       summary: data.summary || "",
       tags: data.tags || [],
       coverImage: data.coverImage,
+      coverWidth: parseOptionalNumber(data.coverWidth),
+      coverHeight: parseOptionalNumber(data.coverHeight),
       draft: data.draft || false,
       content,
     };
