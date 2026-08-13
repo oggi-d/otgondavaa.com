@@ -10,6 +10,42 @@ import type { Metadata } from "next";
 import type { ComponentProps } from "react";
 
 export const dynamicParams = false;
+const DEFAULT_SITE_URL = "https://www.otgondavaa.com";
+
+function normalizeSiteUrl(siteUrl: string): string {
+  return siteUrl.endsWith("/") ? siteUrl.slice(0, -1) : siteUrl;
+}
+
+function toAbsoluteUrl(url: string, siteUrl: string): string {
+  if (url.startsWith("http://") || url.startsWith("https://")) {
+    return url;
+  }
+
+  return `${siteUrl}${url.startsWith("/") ? url : `/${url}`}`;
+}
+
+function appendCacheBust(url: string): string {
+  return `${url}${url.includes("?") ? "&" : "?"}v=2`;
+}
+
+function getImageType(url: string): string {
+  const [pathWithoutQuery] = url.split("?");
+  const lowerPath = pathWithoutQuery.toLowerCase();
+
+  if (lowerPath.endsWith(".png")) {
+    return "image/png";
+  }
+
+  if (lowerPath.endsWith(".jpg") || lowerPath.endsWith(".jpeg")) {
+    return "image/jpeg";
+  }
+
+  if (lowerPath.endsWith(".webp")) {
+    return "image/webp";
+  }
+
+  return "image/png";
+}
 
 export async function generateStaticParams() {
   const posts = getAllPosts();
@@ -32,24 +68,41 @@ export async function generateMetadata({
     };
   }
 
-  const siteUrl =
-    process.env.NEXT_PUBLIC_SITE_URL || "https://www.otgondavaa.com";
+  const siteUrl = normalizeSiteUrl(
+    process.env.NEXT_PUBLIC_SITE_URL || DEFAULT_SITE_URL,
+  );
+  const canonicalUrl = `${siteUrl}/blog/${slug}`;
+  const baseImageUrl = post.coverImage
+    ? toAbsoluteUrl(post.coverImage, siteUrl)
+    : `${siteUrl}/api/og?title=${encodeURIComponent(post.title)}&siteName=otgondavaa.com`;
+  const cacheBustedImageUrl = appendCacheBust(baseImageUrl);
+  const imageType = getImageType(baseImageUrl);
+
+  const openGraphImage = {
+    url: cacheBustedImageUrl,
+    type: imageType,
+    alt: post.title,
+    ...(typeof post.coverWidth === "number" ? { width: post.coverWidth } : {}),
+    ...(typeof post.coverHeight === "number"
+      ? { height: post.coverHeight }
+      : {}),
+  };
 
   return {
     title: post.title,
     description: post.summary,
     openGraph: {
+      url: canonicalUrl,
+      type: "article",
       title: post.title,
       description: post.summary,
-      images: post.coverImage
-        ? [
-            post.coverImage.startsWith("http")
-              ? post.coverImage
-              : `${siteUrl}${post.coverImage}`,
-          ]
-        : [
-            `${siteUrl}/api/og?title=${encodeURIComponent(post.title)}&siteName=otgondavaa.com`,
-          ],
+      images: openGraphImage,
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: post.title,
+      description: post.summary,
+      images: [cacheBustedImageUrl],
     },
   };
 }
