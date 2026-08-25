@@ -12,7 +12,6 @@ import {
   fetchCurrentlyReadingShelf,
   fetchReadShelf,
   GOODREADS_PROFILE_URL,
-  GOODREADS_REVALIDATE_SECONDS,
   type GoodreadsBook,
 } from "@/lib/goodreads";
 
@@ -30,7 +29,7 @@ export const metadata: Metadata = {
     "Goodreads дээрх миний уншсан болон уншиж буй номууд энэ хуудсанд автоматаар шинэчлэгдэнэ.",
 };
 
-export const revalidate = GOODREADS_REVALIDATE_SECONDS;
+export const revalidate = 21600;
 
 function formatBookDate(book: GoodreadsBook): string {
   const date = book.finishedAt ?? book.addedAt;
