@@ -23,7 +23,7 @@ const navItems = [
   { href: "/", label: "Нүүр", icon: Home },
   { href: "/recruiters", label: "Résumé", icon: Briefcase },
   { href: "/blog", label: "Блог", icon: BookOpen },
-  { href: "/reading", label: "Уншсан", icon: Library },
+  { href: "/reading", label: "Номын сан", icon: Library },
   { href: "/mentorship", label: "Сургалт", icon: GraduationCap },
   { href: "/calculators", label: "Тооцоолуур", icon: Calculator },
   { href: "/contact", label: "Холбоо барих", icon: Mail },
