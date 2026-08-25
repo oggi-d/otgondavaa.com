@@ -24,9 +24,9 @@ const DATE_FORMATTER = new Intl.DateTimeFormat("mn-MN", {
 const LATEST_READS_LIMIT = 18;
 
 export const metadata: Metadata = {
-  title: "Уншсан - Otgondavaa",
+  title: "Миний номын сан - Otgondavaa",
   description:
-    "Goodreads дээрх миний уншсан болон уншиж буй номууд энэ хуудсанд автоматаар шинэчлэгдэнэ.",
+    "Otgondavaa Dashnyam-ийн номын санд стартап, дадал, мөнгө, бүтээлч амьдрал, software ба AI сэдвийн уншсан номуудыг Монгол уншигчдад зориулан нэгтгэлээ.",
 };
 
 export const revalidate = 21600;
@@ -92,10 +92,9 @@ export default async function ReadingPage() {
   return (
     <div className="container mx-auto px-4 py-12">
       <div className="mb-10 max-w-3xl">
-        <h1 className="mb-4 text-4xl font-bold">Уншсан</h1>
+        <h1 className="mb-4 text-4xl font-bold">Миний номын сан</h1>
         <p className="text-lg text-muted-foreground">
-          Миний уншиж байгаа болон уншиж дуусгасан номууд Goodreads-оос
-          автоматаар орж ирдэг. Жагсаалт нь хэдэн цаг тутамд өөрөө шинэчлэгдэнэ.{" "}
+          Уншиж байгаа болон уншиж дуусгасан номуудаа энд эмхэлж хуваалцдаг.{" "}
           <Link
             href={GOODREADS_PROFILE_URL}
             target="_blank"
