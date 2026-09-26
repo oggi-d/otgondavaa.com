@@ -1,4 +1,7 @@
+"use client";
+
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { Linkedin, Instagram, Facebook, BookOpen } from "lucide-react";
 
 const XIcon = ({ className }: { className?: string }) => (
@@ -43,6 +46,12 @@ const socialLinks = [
 ];
 
 export function Footer() {
+  const pathname = usePathname();
+
+  if (pathname === "/pretty-sumi-2026") {
+    return null;
+  }
+
   return (
     <footer className="border-t bg-background">
       <div className="container mx-auto flex flex-col items-center justify-center gap-6 py-8 px-4 md:flex-row md:justify-between md:py-6">
